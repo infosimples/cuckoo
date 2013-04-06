@@ -1,0 +1,11 @@
+Week summary:
+<br><br>
+
+<% @week_summary.each do |day, time| %>
+  <%= day %> | <%= time %><br>
+<% end %>
+
+<br><br>
+Day entries:
+<br><br>
+<%= @day_entries.inspect  %>

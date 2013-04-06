@@ -30,4 +30,3 @@ group :development, :test do
   gem 'debugger', '>= 1.5.0'
   gem 'thin', '~> 1.4.1' # uses thin as development webserver
 end
-

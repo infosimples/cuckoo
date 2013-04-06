@@ -1,0 +1,4 @@
+en:
+  flash_messages:
+    create_success: '%{model} was successfully created.'
+    update_success: '%{model} was successfully updated.'
