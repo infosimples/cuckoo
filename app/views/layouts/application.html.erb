@@ -1,14 +1,79 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Cuckoo</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title><%= generate_title %></title>
 
-<%= yield %>
+    <!-- Styles -->
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <!--[if lt IE 8]>
+      <%= stylesheet_link_tag "application-ie7", media: "all", "data-turbolinks-track" => true %>
+    <![endif]-->
 
-</body>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <%= csrf_meta_tags %>
+  </head>
+  <body id="<%= controller_name %>">
+
+    <div id="wrap">
+
+      <%= render 'layouts/header' %>
+
+
+      <div id="main">
+        <div class="container">
+
+          <% unless notice.blank? %>
+            <div class="alert alert-success">
+              <a class="close" data-dismiss="alert">×</a>
+              <strong>Yeah...</strong> <%= notice %>
+            </div>
+          <% end %>
+
+          <% unless info.blank? %>
+            <div class="alert alert-info">
+              <a class="close" data-dismiss="alert">×</a>
+              <strong>Shh...</strong> <%= info %>
+            </div>
+          <% end %>
+
+          <% unless warning.blank? %>
+            <div class="alert alert-warning">
+              <a class="close" data-dismiss="alert">×</a>
+              <strong>Oops...</strong> <%= warning %>
+            </div>
+          <% end %>
+
+          <% unless alert.blank? %>
+            <div class="alert alert-error">
+              <a class="close" data-dismiss="alert">×</a>
+              <strong>Psst...</strong> <%= alert %>
+            </div>
+          <% end %>
+
+          <%= yield %>
+
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'layouts/footer' %>
+
+
+    <!--  Javascripts placed at the end of the document
+        so the page loads faster
+    ==================================================== -->
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= yield :javascripts %>
+
+    <!--  Hidden modals placed at the end of the document
+        so the page loads faster
+    ==================================================== -->
+    <%= yield :modals %>
+
+  </body>
 </html>

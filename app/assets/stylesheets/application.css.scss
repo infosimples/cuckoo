@@ -8,6 +8,19 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require bootswatch.subnav
+ *= require bootstrap.stickyfooter
  *= require_self
- *= require_tree .
  */
+
+/* Import Bootstrap, Bootswatch's Cerulean theme and Font Awesome */
+@import "partials/bootstrap-overrided-variables"; /* our bootstrap overrided variables */
+@import "bootswatch/cerulean/variables";
+@import "bootstrap";
+@import "bootswatch/cerulean/bootswatch";
+@import "font-awesome";
+
+/* Import partials */
+@import "partials/header";
+@import "partials/footer";
+@import "partials/main";

@@ -1,0 +1,23 @@
+/* Sticky footer styles based on
+http://twitter.github.io/bootstrap/examples/sticky-footer-navbar.html
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+footer {
+  height: 60px;
+}

@@ -1,0 +1,13 @@
+header {
+  padding-top: 87px; // skip navbar and subnav
+
+
+  .gravatar {
+    @include border-radius(3px);
+    float: left;
+    margin: -8px 8px 0 4px;
+  }
+
+
+
+}
