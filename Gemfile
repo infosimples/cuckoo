@@ -4,11 +4,13 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0.beta1'
 gem 'jquery-rails'
 gem 'mysql2'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jbuilder'
+
 
 gem 'gravatar_image_tag', '~> 1.1.3'
+gem 'simple_form', '~> 3.0.0.beta1'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
