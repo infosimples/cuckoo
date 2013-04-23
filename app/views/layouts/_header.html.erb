@@ -35,7 +35,7 @@
         <li<%= ' class="active"'.html_safe if controller_name == 'users' %>><%= link_to 'Users', '#' %></li>
         <li<%= ' class="active"'.html_safe if controller_name == 'projects' %>><%= link_to 'Projects', projects_path %></li>
         <li<%= ' class="active"'.html_safe if controller_name == 'tasks' %>><%= link_to 'Tasks', tasks_path %></li>
-        <li<%= ' class="active"'.html_safe if controller_name == 'settings' %>><%= link_to 'Application', '#' %></li>
+        <li<%= ' class="active"'.html_safe if controller_name == 'settings' %>><%= link_to 'Application', settings_path %></li>
       <% end %>
     </ul>
   </div>

@@ -1,8 +1,10 @@
 Cuckoo::Application.routes.draw do
 
+  resources :settings, :only => [:index, :update]
   resources :projects, :except => [:show, :destroy]
   resources :tasks, :except => [:show, :destroy]
   resources :time_entries
+
 
   get 'timesheet' => 'timesheet#show'
 
