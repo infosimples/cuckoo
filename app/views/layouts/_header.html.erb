@@ -7,7 +7,7 @@
       <div class="container">
         <%= link_to 'Cuckoo'.html_safe, 'https://github.com/kauplus/cuckoo', target: '_blank', class: 'brand', rel: 'tooltip', data: { original_title: 'Fork me on GitHub', placement: 'bottom' } %>
         <ul class="nav">
-          <li<%= ' class="active"'.html_safe if page_scope == :track_time %>><%= link_to 'Track Time', '#' %></li>
+          <li<%= ' class="active"'.html_safe if page_scope == :timesheet %>><%= link_to 'Track Time', timesheet_path %></li>
           <li<%= ' class="active"'.html_safe if page_scope == :settings %>><%= link_to 'Settings', '#' %></li>
         </ul>
         <ul class="nav pull-right">
@@ -33,8 +33,8 @@
         <li class="active"><%= link_to 'Track', '#' %></li>
       <% elsif true# page_scope == :settings %>
         <li<%= ' class="active"'.html_safe if controller_name == 'users' %>><%= link_to 'Users', '#' %></li>
-        <li<%= ' class="active"'.html_safe if controller_name == 'projects' %>><%= link_to 'Projects', '#' %></li>
-        <li<%= ' class="active"'.html_safe if controller_name == 'tasks' %>><%= link_to 'Tasks', '#' %></li>
+        <li<%= ' class="active"'.html_safe if controller_name == 'projects' %>><%= link_to 'Projects', projects_path %></li>
+        <li<%= ' class="active"'.html_safe if controller_name == 'tasks' %>><%= link_to 'Tasks', tasks_path %></li>
         <li<%= ' class="active"'.html_safe if controller_name == 'settings' %>><%= link_to 'Application', '#' %></li>
       <% end %>
     </ul>

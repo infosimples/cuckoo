@@ -1,12 +1,9 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update]
 
   # GET /projects
   def index
     @projects = Project.all
-  end
-
-  def show
   end
 
   # GET /projects/new
@@ -24,7 +21,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: flash_message(:create_success) }
+        format.html { redirect_to projects_url, notice: flash_message(:create_success) }
         format.json { render action: 'show', status: :created, location: @project }
       else
         format.html { render action: 'new' }
@@ -37,21 +34,12 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: flash_message(:update_success) }
+        format.html { redirect_to projects_url, notice: flash_message(:update_success) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /blas/:id
-  def destroy
-    @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url }
-      format.json { head :no_content }
     end
   end
 

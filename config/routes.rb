@@ -1,6 +1,6 @@
 Cuckoo::Application.routes.draw do
 
-  resources :projects
+  resources :projects, :except => [:show, :destroy]
   resources :tasks
   resources :time_entries
 
