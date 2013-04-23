@@ -1,12 +1,9 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update]
 
   # GET /tasks
   def index
     @tasks = Task.all
-  end
-
-  def show
   end
 
   # GET /tasks/new
@@ -24,7 +21,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: flash_message(:create_success) }
+        format.html { redirect_to tasks_url, notice: flash_message(:create_success) }
         format.json { render action: 'show', status: :created, location: @task }
       else
         format.html { render action: 'new' }
@@ -37,21 +34,12 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: flash_message(:update_success) }
+        format.html { redirect_to tasks_url, notice: flash_message(:update_success) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /tasks/:id
-  def destroy
-    @task.destroy
-    respond_to do |format|
-      format.html { redirect_to tasks_url }
-      format.json { head :no_content }
     end
   end
 
@@ -68,7 +56,7 @@ class TasksController < ApplicationController
   end
 
   def flash_message(message)
-    I18n.t(message, scope: :flash_messages, model: Task.model_name.human)
+    super(message, Project)
   end
 
 end
