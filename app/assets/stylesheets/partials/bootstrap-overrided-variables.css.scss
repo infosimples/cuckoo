@@ -1,1 +1,10 @@
 /* Bootstrap overrided variables goes here */
+.pagination-large ul li a{
+ min-width: 94px;
+}
+.breadcrumb{
+  padding-left: 0px;
+  margin: 0px;
+  border: 0px;
+  background-color: none;
+}

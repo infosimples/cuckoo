@@ -1,12 +1,15 @@
 Cuckoo::Application.routes.draw do
 
+  root :to => "timesheet#show"
+
   resources :settings, :only => [:index, :update]
   resources :projects, :except => [:show, :destroy]
   resources :tasks, :except => [:show, :destroy]
   resources :time_entries
 
+  patch 'time_entries/:id/finish' => 'time_entries#finish', as: :time_entry_finish
 
-  get 'timesheet' => 'timesheet#show'
+  get 'timesheet(/:year/:month/:day)' => 'timesheet#show', as: :timesheet
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

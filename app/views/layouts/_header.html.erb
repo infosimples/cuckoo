@@ -7,14 +7,14 @@
       <div class="container">
         <%= link_to 'Cuckoo'.html_safe, 'https://github.com/kauplus/cuckoo', target: '_blank', class: 'brand', rel: 'tooltip', data: { original_title: 'Fork me on GitHub', placement: 'bottom' } %>
         <ul class="nav">
-          <li<%= ' class="active"'.html_safe if page_scope == :timesheet %>><%= link_to 'Track Time', timesheet_path %></li>
-          <li<%= ' class="active"'.html_safe if page_scope == :settings %>><%= link_to 'Settings', '#' %></li>
+          <li<%= ' class="active"'.html_safe if page_scope == :timesheet %>><%= link_to 'Track Time', Timesheet.to_url %></li>
+          <li<%= ' class="active"'.html_safe if page_scope == :settings %>><%= link_to 'Settings', '/projects' %></li>
         </ul>
         <ul class="nav pull-right">
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= gravatar_image_tag('not@spam.com', gravatar: { size: 35 }, class: 'gravatar') %> <b class="caret"></b></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%#= gravatar_image_tag('not@spam.com', gravatar: { size: 35 }, class: 'gravatar') %> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li class="nav-header">Donald Knuth</li>
+              <li class="nav-header">Donald Knuth </li>
               <li><%= link_to 'My Account', '#', tabindex: '-1' %></li>
               <li class="divider"></li>
               <li><%= link_to 'Sign Out', '#', tabindex: '-1' %></li>
@@ -29,9 +29,9 @@
   <!-- Subnav -->
   <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
-      <% if false# page_scope == :track_time %>
+      <% if page_scope == :timesheet %>
         <li class="active"><%= link_to 'Track', '#' %></li>
-      <% elsif true# page_scope == :settings %>
+      <% elsif page_scope == :settings %>
         <li<%= ' class="active"'.html_safe if controller_name == 'users' %>><%= link_to 'Users', '#' %></li>
         <li<%= ' class="active"'.html_safe if controller_name == 'projects' %>><%= link_to 'Projects', projects_path %></li>
         <li<%= ' class="active"'.html_safe if controller_name == 'tasks' %>><%= link_to 'Tasks', tasks_path %></li>

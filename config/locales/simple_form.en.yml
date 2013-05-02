@@ -23,4 +23,16 @@ en:
     #   defaults:
     #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
-
+    labels:
+      defaults:
+        started_at: 'Start'
+        ended_at: 'End'
+  activerecord:
+    errors:
+      models:
+        time_entry:
+          attributes:
+            base:
+              entries_that_dont_start_today_must_have_start_and_end: "Entries that aren't from today must have start and end time"
+              start_and_end_must_be_in_order: "Start and end must be in order"
+              start_and_end_must_be_same_day: "Start and end must be the same day"

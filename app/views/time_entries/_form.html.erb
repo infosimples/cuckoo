@@ -1,21 +1,26 @@
-<%= form_for(@time_entry) do |f| %>
-  <% if @time_entry.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@time_entry.errors.count, "error") %> prohibited this time_entry from being saved:</h2>
-
-      <ul>
-      <% @time_entry.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for(@time_entry, html: {class: 'form-horizontal' }) do |f| %>
+  <% if f.error_notification %>
+    <div class="alert alert-error">
+      <%= f.error :base %>
     </div>
   <% end %>
+  <%= f.input :project_id, collection: @projects %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+
+  <%= f.input :task_id, collection: @tasks %>
+
+
+
+  <%= f.input :started_at, as: 'string',  :input_html => { :value =>  @time_entry.started_at && @time_entry.started_at.strftime('%H:%M'),  class: 'time'} %>
+  <%= f.input :ended_at, as: 'string',  :input_html => { :value =>  @time_entry.ended_at && @time_entry.ended_at.strftime('%H:%M'),  class: 'time'} %>
+  <% %>
+  <%= f.input :year,   as: 'hidden', input_html: { value: params[:year], name: :year } %>
+  <%= f.input :month,   as: 'hidden', input_html: { value: params[:month], name: :month } %>
+  <%= f.input :day,   as: 'hidden', input_html: { value: params[:day], name: :day } %>
+  <%= f.input :description %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>

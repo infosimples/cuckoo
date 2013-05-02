@@ -1,26 +1,30 @@
-<h1>Listing time_entries</h1>
-
+<h1>Time entries</h1>
+<%= params %>
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Time Entry</th>
+      <th>Started at:</th>
+      <th>Ended at:</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @time_entries.each do |time_entry| %>
-    <tr>
-      <td><%= time_entry.name %></td>
-      <td><%= link_to 'Show', time_entry %></td>
-      <td><%= link_to 'Edit', edit_time_entry_path(time_entry) %></td>
-      <td><%= link_to 'Destroy', time_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+    <% unless @time_entries.nil? %>
+      <% @time_entries.each do |time_entry| %>
+        <tr>
+          <td><%= time_entry.project.name %> > <%= time_entry.task.name %> - <%= time_entry.description%></td>
+          <td><%= time_entry.started_at.strftime("%H:%M") %></td>
+          <td><%= time_entry.ended_at.strftime("%H:%M") %></td>
+          <td><%= link_to 'Show', time_entry %></td>
+          <td><%= link_to 'Edit', edit_time_entry_path(time_entry) %></td>
+          <td><%= link_to 'Destroy', time_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Project', new_time_entry_path %>
+<%= link_to 'New Time Entry', new_time_entry_path %>

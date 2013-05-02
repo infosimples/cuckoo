@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require jquery.livequery
 //= require bootstrap
+//= require jquery.maskedinput.min
+//= require jquery.countup
 //= require_tree .

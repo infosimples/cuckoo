@@ -1,5 +1,5 @@
-<h1>New time_entry</h1>
-
+<h1>New Time Entry</h1>
+<%= params %>
 <%= render 'form' %>
 
-<%= link_to 'Back', time_entries_path %>
+<%= link_to 'Back', Timesheet.to_url(Time.zone.parse("#{params[:year]}-#{params[:month]}-#{params[:day]}")) %>

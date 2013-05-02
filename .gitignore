@@ -17,3 +17,4 @@
 
 # Ignore user profile files
 /.rvmrc
+.DS_Store

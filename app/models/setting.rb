@@ -5,4 +5,7 @@ class Setting < ActiveRecord::Base
   after_initialize do
     self.time_zone ||= 'Brasilia'
   end
+  after_save do
+    Time.zone = Setting.first.time_zone
+  end
 end

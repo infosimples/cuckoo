@@ -22,6 +22,21 @@
 en:
   hello: "Hello world"
 
+  misc:
+    tasks:
+      zero: no tasks
+      one: 1 task
+      other: "%{count} tasks"
+    projects:
+      zero: no projects
+      one: 1 project
+      other: "%{count} projects"
+
+
+  no_projects: "There aren't any projects"
+  no_tasks: "There aren't any tasks"
+  no_time_entry: "There aren't any time entries this day"
+
   active_record:
 
     errors:

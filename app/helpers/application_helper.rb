@@ -9,8 +9,8 @@ module ApplicationHelper
 
   def page_scope
     @page_scope ||= case
-    when (controller_name.in? ['time_entries'])
-      :track_time
+    when (controller_name.in? ['time_entries', 'timesheet'])
+      :timesheet
     when (controller_name.in? ['users', 'projects', 'tasks', 'settings'])
       :settings
     end
