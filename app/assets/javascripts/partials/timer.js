@@ -1,15 +1,11 @@
-
-
-function time_window(countHoulder, callback){
+function time_window(count_holder, callback){
 
   var time = 0;
   var mode = 1;
   var status = 0;
   var timer_interval; //  This is used by setInterval function
   var id = id;
-  positions = countHoulder.find('.position'); // talvez não precise
-
-
+  positions = count_holder.find('.position');
 
   this.reset = function(time_sec){
 
@@ -19,11 +15,10 @@ function time_window(countHoulder, callback){
 
   }
 
-
   // this will start the timer ex. start the timer with 1 second interval timer.start(1000)
   this.start = function(interval){
 
-    interval = 1000; //(typeof(interval) !== 'undefined') ? interval : 1000;
+    interval = 1000;
 
     if (status == 0){
       status = 1;
@@ -51,9 +46,6 @@ function time_window(countHoulder, callback){
     }
   }
 
-
-
-
   //  Same as the name, this will stop or pause the timer ex. timer.stop()
   this.stop =  function(){
 
@@ -63,36 +55,11 @@ function time_window(countHoulder, callback){
     }
   }
 
-
-
-  // Reset the timer to zero or reset it to your own custom time ex. reset to zero second timer.reset(0)
-
-
-  // // Change the mode of the timer, count-up (1) or countdown (0)
-  // this.mode = function(tmode){ // not necessary
-  //   mode = tmode;
-  // }
-  // // This methode return the current mode of the timer count-up (1) or countdown (0)
-  // this.getMode = function(){ // not necessary
-  //   return mode;
-  // }
-
   // This methode return the current value of the timer
   this.getTime = function(){
     return time;
   }
 
-  // this.setPositions = function(id){
-  //   positions = $('.count_'+id).find('.position');
-  // }
-
-  // this.getPositions = function(){
-  //   positions
-  // }
-  // this.getPositionsId = function(){
-  //   positions.parent('.countHolder').attr('data-id');
-  // }
-  // This methode return the status of the timer running (1) or stoped (0)
   this.getStatus = function(){
     return status;
   }
@@ -105,7 +72,6 @@ function time_window(countHoulder, callback){
     var hour = Math.floor(time / 3600) % 60;
     var day = Math.floor(time / 86400) % 60;
 
-
     second = (second < 10) ? '0'+second : second;
     minute = (minute < 10) ? '0'+minute : minute;
     hour = (hour < 10) ? '0'+hour : hour;
@@ -115,9 +81,6 @@ function time_window(countHoulder, callback){
     updateDuo(4, 5, minute);
     updateDuo(6, 7, second);
 
-    $('div.timer span.second').html(second);
-    $('div.timer span.minute').html(minute);
-    $('div.timer span.hour').html(hour);
   }
 
   function updateDuo(minor,major,value){
@@ -151,7 +114,6 @@ function time_window(countHoulder, callback){
 
     // The .static class is added when the animation
     // completes. This makes it run smoother.
-
     digit
       .before(replacement)
       .removeClass('static')
@@ -165,13 +127,11 @@ function time_window(countHoulder, callback){
         replacement.addClass('static');
       });
   }
-
 }
 
 $(document).ready(function(e){
 
   $.each($('div.stopped'), function(i) {
-
     var time_sec = $(this).attr("data-id");
 
     timer = new time_window( $(this) );
@@ -180,7 +140,6 @@ $(document).ready(function(e){
   });
 
   $.each($('div.running'), function(i) {
-
     var time_sec = $(this).attr("data-id");
 
     timer = new time_window( $(this) );
@@ -188,7 +147,9 @@ $(document).ready(function(e){
     $(this).data('timer', timer);
 
     timer.reset(time_sec);
+
     timer.start();
+
   });
 
   $('.stop_button').click(function(){
@@ -205,8 +166,6 @@ $(document).ready(function(e){
 
     $(this).addClass('none').siblings('.btn-inverse').removeClass('none');
 
-
   });
 
 });
-

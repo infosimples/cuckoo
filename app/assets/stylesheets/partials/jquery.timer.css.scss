@@ -1,11 +1,11 @@
-.countHolder{
+.count-holder {
   font: 17px 'Open Sans Condensed',sans-serif;
   text-align: left;
   letter-spacing: -5px;
   margin-left: 33%;
 }
 
-.position{
+.position {
   display: inline-block;
   height: 1.6em;
   overflow: hidden;
@@ -13,7 +13,7 @@
   width: 16px;
 }
 
-.digit{
+.digit {
   position: absolute;
   display: block;
   width: 15px;
@@ -24,42 +24,17 @@
   letter-spacing: -1px;
 }
 
-.running{
-  .digit.static{
+.running {
+  .digit.static {
     box-shadow:1px 1px 1px rgb(183, 222, 245);
-
-    background-image: linear-gradient(bottom, rgb(35, 160, 231) 50%, rgb(35, 160, 231) 50%);
-    background-image: -o-linear-gradient(bottom, rgb(35, 160, 231) 50%, rgb(35, 160, 231) 50%);
-    background-image: -moz-linear-gradient(bottom, rgb(35, 160, 231) 50%, rgb(35, 160, 231) 50%);
-    background-image: -webkit-linear-gradient(bottom, rgb(35, 160, 231) 50%, rgb(35, 160, 231) 50%);
-    background-image: -ms-linear-gradient(bottom, rgb(35, 160, 231) 50%, rgb(35, 160, 231) 50%);
-
-    background-image: -webkit-gradient(
-      linear,
-      left bottom,
-      left top,
-      color-stop(0.5, rgb(35, 160, 231)),
-      color-stop(0.5, rgb(35, 160, 231))
-    );
+    @include gradient-vertical(rgb(35, 160, 231), rgb(35, 160, 231));
   }
 }
-.stopped{
-  .digit.static{
+
+.stopped {
+  .digit.static {
     box-shadow:1px 1px 1px #aaa;
-
-    background-image: linear-gradient(bottom, #d7d7d7 50%, #cfcfcf 50%);
-    background-image: -o-linear-gradient(bottom, #d7d7d7 50%, #cfcfcf 50%);
-    background-image: -moz-linear-gradient(bottom, #d7d7d7 50%, #cfcfcf 50%);
-    background-image: -webkit-linear-gradient(bottom, #d7d7d7 50%,#cfcfcf 50%);
-    background-image: -ms-linear-gradient(bottom, #d7d7d7 50%, #cfcfcf 50%);
-
-    background-image: -webkit-gradient(
-      linear,
-      left bottom,
-      left top,
-      color-stop(0.5, #d7d7d7),
-      color-stop(0.5, #cfcfcf)
-    );
+    @include gradient-vertical(#d7d7d7, #cfcfcf);
   }
 }
 
@@ -68,23 +43,29 @@
  * of the countdown that you don't need.
  */
 
-.countDays{ display:none !important; }
-.countDiv0{ display:none !important; }
-.countHours{}
-.countDiv1{}
-.countMinutes{}
-.countDiv2{}
-.countSeconds{}
+.count-days { display:none !important; }
 
-.countDiv{
+.count-div-0 { display:none !important; }
+
+.count-hours { }
+
+.count-div-1 { }
+
+.count-minutes { }
+
+.count-div-2 { }
+
+.count-seconds { }
+
+.count-div {
   display:inline-block;
   width: 10px;
   height: 31px;
   position:relative;
 }
 
-.countDiv:before,
-.countDiv:after{
+.count-div:before,
+.count-div:after {
   position: absolute;
   width: 4px;
   height: 5px;
@@ -97,6 +78,6 @@
   content: '';
 }
 
-.countDiv:after{
+.count-div:after {
   top:0.9em;
 }

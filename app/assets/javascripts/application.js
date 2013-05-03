@@ -10,11 +10,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+
 //= require jquery
+//= require jquery.livequery
+//= require jquery.maskedinput.min
+//= require jquery.timer
 //= require jquery_ujs
 //= require turbolinks
-//= require jquery.livequery
 //= require bootstrap
-//= require jquery.maskedinput.min
-//= require jquery.countup
 //= require_tree .

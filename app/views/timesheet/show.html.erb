@@ -2,21 +2,34 @@
 
 <!-- Primary menu with the datetime, days control, calendar and user -->
 <div class="container row">
+
   <div class="pagination span5">
     <h2 class='pull-left'><%= @date.strftime("%A, %d %b") %></h2>
   </div>
+
   <nav class="span4 pull-right" style="padding: 13px 0;">
+
     <ul class="pager span2 pull-right">
       <li><a href='#' class='icon-calendar'style="margin-top:2px;"></a></li>
       <li><a href='#' class='icon-user'style="margin-top:2px;"></a></li>
     </ul>
+
     <div class="pagination pull-right">
+
       <ul>
-          <li class="previous"><a href="<%= Timesheet.to_url(@date.yesterday) %>" class='icon-arrow-left'></a></li>
-          <li <% if @date.to_date == Time.zone.now.to_date %>class="active" <% end %>><a href="<%= Timesheet.to_url %>" class=''>Today</a></li>
-          <li class="next"><a href="<%= Timesheet.to_url(@date.tomorrow) %>" class='icon-arrow-right'></a></li>
+          <li class="previous">
+            <%= link_to '', timesheet_url(today_date(@date.yesterday)), class: 'icon-arrow-left' %>
+          </li>
+          <li <% if @date.to_date == Time.zone.now.to_date %>class="active" <% end %>>
+            <%= link_to 'Today', timesheet_url %>
+          </li>
+          <li class="next">
+            <%= link_to '', timesheet_url(today_date(@date.tomorrow)), class: 'icon-arrow-right' %>
+          </li>
       </ul>
+
     </div>
+
   </nav>
 
 </div>
@@ -25,14 +38,22 @@
 <div class="pagination pagination-large week">
   <ul>
     <% Date::DAYNAMES.each_with_index do |weekday,constant_day| %>
-      <li <% if constant_day == @date.wday %> class="active" <% end %>><a href="<%= Timesheet.to_url(@date.advance({days: constant_day-@date.wday})) %>"><%= weekday %></a></li>
+
+      <li <% if constant_day == @date.wday %> class="active" <% end %>>
+        <%= link_to weekday, timesheet_url(today_date(@date.advance({days: constant_day-@date.wday}))) %>
+        </a>
+      </li>
+<%# debugger %>
     <% end %>
   </ul>
 </div>
 
 
 <!-- New Entry button-->
-<%= link_to '<i class="icon-plus-sign icon-white"></i> New Entry'.html_safe, new_time_entry_path(:year => params[:year], :month => params[:month], :day => params[:day]), :class => 'btn btn-inverse btn-large entry-position' %>
+<%= link_to '<i class="icon-plus-sign icon-white"></i>
+             New Entry'.html_safe,
+             new_time_entry_path( working_date(params) ),
+             class: 'btn btn-inverse btn-large entry-position' %>
 
 
 <!-- Table with tehe time entries -->
@@ -41,12 +62,20 @@
   <thead>
     <tr>
       <% if @day_entries.empty? %>
-        <th> <div class="text-center alert alert-info"> <%= t :no_time_entry %> </div> </th>
+
+        <th>
+          <div class="text-center alert alert-info">
+            <%= t :no_time_entry %>
+          </div>
+        </th>
+
       <% else %>
+
         <th>Activity</th>
         <th>Time</th>
         <th>Duration</th>
         <th>Actions</th>
+
       <% end %>
     </tr>
   </thead>
@@ -57,37 +86,62 @@
       <% @day_entries.each do |time_entry| %>
 
         <tr>
+
           <td class="row-fluid span6">
             <ul class="breadcrumb row-fluid span10">
 
            <!-- Project | Task > Description  -->
               <li>
+
                 <% if time_entry.project %>
-                  <blockquote class="pull-left"><p class="pull-left"><%= time_entry.project.name %></p></blockquote>
+                  <blockquote class="pull-left">
+                    <p class="pull-left">
+                      <%= time_entry.project.name %>
+                    </p>
+                  </blockquote>
                 <% end %>
+
                 <% if time_entry.task %>
                   <% if time_entry.project %>
                     <span class="divider pull-left">|</span>
                   <% end %>
-                  <blockquote class="pull-left"><p class="pull-left"><%= time_entry.task.name %></p></blockquote>
+                  <blockquote class="pull-left">
+                    <p class="pull-left">
+                      <%= time_entry.task.name %>
+                    </p>
+                  </blockquote>
                 <% end %>
+
                 <% unless time_entry.description.empty? %>
                   <% if time_entry.project || time_entry.task %>
                     <span class="divider pull-left">></span>
                   <% end %>
-                  <blockquote class="pull-left"><p class="pull-left"><%= time_entry.description %></p></blockquote>
+                  <blockquote class="pull-left">
+                    <p class="pull-left">
+                      <%= time_entry.description %>
+                    </p>
+                  </blockquote>
                 <% end %>
+
               </li>
 
             </ul>
           </td>
 
-          <td class="row-fluid span1 time">
+          <td class="row-fluid span1">
 
             <!-- Started_at and Ended_at Time column -->
             <div class="row-fluid span12">
-              <blockquote><h5 class="started_at"><%= time_entry.started_at.strftime("%H:%M") %></h5></blockquote>
-              <blockquote><h5 class="ended_at"><%= time_entry.ended_at.strftime("%H:%M") unless time_entry.ended_at.nil? %></h5></blockquote>
+              <blockquote>
+                <h5 class="started_at">
+                  <%= time_entry.started_at.strftime("%H:%M") %>
+                </h5>
+              </blockquote>
+              <blockquote>
+                <h5 class="ended_at">
+                  <%= time_entry.ended_at.strftime("%H:%M") unless time_entry.ended_at.nil? %>
+                </h5>
+              </blockquote>
             </div>
 
           </td>
@@ -97,20 +151,20 @@
             <% if time_entry.ended_at.present? %>
 
               <!-- Timer -->
-              <div class="countHolder stopped" data-id="<%= (time_entry.ended_at - time_entry.started_at).ceil %>">
+              <div class="count-holder stopped" data-id="<%= (time_entry.ended_at - time_entry.started_at).ceil %>">
 
                 <!-- timer hh:mm:ss -->
-                <% ['Days','Hours','Minutes','Seconds'].each_with_index do |elem,i| %>
+                <% ['days','hours','minutes','seconds'].each_with_index do |elem,i| %>
 
-                  <span class="count<%= elem %>">
+                  <span class="count-<%= elem %>">
                     <span class="position">
                       <span class="digit static">0</span>
                     </span>
                     <span class="position">
                       <span class="digit static">0</span>
                     </span>
-                  <% if elem != "Seconds" %>
-                    <span class="countDiv countDiv<%= i %>"></span>
+                  <% if elem != "seconds" %>
+                    <span class="count-div count-div-<%= i %>"></span>
                   <% end %>
                   </span>
 
@@ -120,26 +174,25 @@
 
               <!-- Pass the parameters too-->
               <div class="row-fluid span12">
-                 <%= link_to 'Start'.html_safe, time_entries_path({:year => params[:year], :month => params[:month], :day => params[:day], :time_entry => {project_id: time_entry.project_id, task_id: time_entry.task_id, description: time_entry.description} }), method: 'POST',  :class => 'btn btn-inverse btn-small' %>
+                 <%= start_button(time_entry) %>
               </div>
-
 
             <% else %>
 
-              <div class="countHolder running" data-id="<%= (Time.zone.now - time_entry.started_at).ceil %>" >
+              <div class="count-holder running" data-id="<%= (Time.zone.now - time_entry.started_at).ceil %>" >
 
-                <% ['Days','Hours','Minutes','Seconds'].each_with_index do |elem,i| %>
+                <% ['days','hours','minutes','seconds'].each_with_index do |elem,i| %>
 
                 <!-- timer hh:mm:ss -->
-                  <span class="count<%= elem %>">
+                  <span class="count-<%= elem %>">
                     <span class="position">
                       <span class="digit static">0</span>
                     </span>
                     <span class="position">
                       <span class="digit static">0</span>
                     </span>
-                  <% if elem != "Seconds" %>
-                    <span class="countDiv countDiv<%= i %>"></span>
+                  <% if elem != "seconds" %>
+                    <span class="count-div count-div-<%= i %>"></span>
                   <% end %>
                   </span>
 
@@ -149,20 +202,25 @@
 
               <div class="row-fluid span12">
 
-                <%= link_to 'Stop'.html_safe, time_entry_finish_path(time_entry.id, {:time_entry => { ended_at: ''} }), method: 'PATCH', :class => 'btn btn-warning btn-small stop_button' %>
+                <%= link_to 'Stop'.html_safe, time_entry_finish_path( time_entry.id,
+                                                                    { time_entry: { ended_at: '' } }),
+                                                                      method: 'PATCH',
+                                                                      class: 'btn btn-warning btn-small stop_button' %>
 
-                <%= link_to 'Start'.html_safe, time_entries_path({:year => params[:year], :month => params[:month], :day => params[:day], :time_entry => {project_id: time_entry.project_id, task_id: time_entry.task_id, description: time_entry.description} }), method: 'POST', :class => 'btn btn-inverse btn-small none' %>
+                <%= start_button(time_entry, 'none') %>
               </div>
 
             <% end %>
 
           </td>
           <td class="row-fluid span1">
+
             <div class="btn-group">
               <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-edit icon-white"></i>
                 <span class="caret"></span>
               </a>
+
               <ul class="dropdown-menu">
                   <li>
                     <%= link_to '<i class="icon-edit"></i> Edit'.html_safe, edit_time_entry_path(time_entry) %>
@@ -171,10 +229,16 @@
                     <%= link_to '<i class="icon-trash"></i> Destroy'.html_safe,time_entry, method: :delete, data: { confirm: 'Are you sure?' } %>
                   </li>
                 </ul>
+
             </div>
+
           </td>
         </tr>
-      <% end %>
-    <% end %>
+
+      <% end %><!-- end for @day_entries loop -->
+
+    <% end %><!-- end for unless @day_entries.empty? -->
+
   </tbody>
+
 </table>

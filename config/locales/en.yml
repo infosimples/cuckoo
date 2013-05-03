@@ -22,7 +22,7 @@
 en:
   hello: "Hello world"
 
-  misc:
+  plurals:
     tasks:
       zero: no tasks
       one: 1 task

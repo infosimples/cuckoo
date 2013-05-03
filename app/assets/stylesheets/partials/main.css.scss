@@ -1,53 +1,65 @@
-.hidden, .none{
+.hidden, .none {
   display: none;
 }
-.alert-error span{
-  color: #bd4247
+
+.alert-error span {
+  color: #bd4247;
 }
 
 #main {
   padding: 20px 0 80px;
-
-
-.page-header {
-  h1, .btn {
-    display: inline;
-    vertical-align: middle;
-    margin-right: 15px;
+  .page-header {
+    h1, .btn {
+      display: inline;
+      vertical-align: middle;
+      margin-right: 15px;
+    }
   }
 }
 
-}
 .table th:first-child {
   text-align: left;
 }
-.table th, .table td{
+
+.table th, .table td {
   vertical-align: middle;
   text-align: center;
 }
-.table th:first-child, .table td:first-child{
+
+.table th:first-child, .table td:first-child {
     text-align: left;
 }
-.breadcrumb{
+
+.breadcrumb {
   padding: 5px 20px;
-  margin: 0px 0px 0px 0px;
+  margin: 0px;
   background-color: transparent;
 }
-blockquote{
+
+blockquote {
   padding-left: 0px; margin: 0px; border: 0px;
 }
-.started_at{
+
+.started_at {
   color: #033c73;
 }
-.ended_at{
+
+.ended_at {
   color: #dd5600;
 }
 
-a.entry-position{
+a.entry-position {
   position: absolute;
   top: 238px;
   left: 25px;
 }
-.dropdown-menu li a{
+
+.dropdown-menu li a {
   text-align: left;
+}
+
+.stop_button, .stop_button:hover, .stop_button:active {
+  background: #dd5600 image-url('spinner.gif') no-repeat 2px 4px;
+  width: 32px;
+  text-indent: 12px
 }

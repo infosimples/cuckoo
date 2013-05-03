@@ -46,6 +46,7 @@ class TimeEntry < ActiveRecord::Base
   end
 
   def entries_that_dont_start_today_must_have_start_and_end
+
     if (date = Time.zone.parse(entry_date)) && date.to_date != Time.zone.now.to_date && (start_time.empty? || end_time.empty?)
       errors.add(:base, :entries_that_dont_start_today_must_have_start_and_end)
     end

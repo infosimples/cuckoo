@@ -28,8 +28,4 @@ class Timesheet
     TimeEntry.for_user(@user).for_day(day).all
   end
 
-  def self.to_url(day = Time.zone.now)
-    return "/timesheet/#{day.year}/#{day.month}/#{day.day}"
-  end
-
 end

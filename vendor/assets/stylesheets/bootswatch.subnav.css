@@ -31,9 +31,7 @@
   padding-bottom: 11px;
   border-left: 1px solid #f5f5f5;
   border-right: 1px solid #e5e5e5;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
+  @include border-radius(0px);
 }
 
 .subnav .nav > .active > a,
@@ -71,7 +69,6 @@
   -moz-border-radius: 0 0 4px 4px;
   border-radius: 0 0 4px 4px;
 }
-
 
 .subnav-fixed {
   position: fixed;

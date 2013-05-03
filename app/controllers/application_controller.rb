@@ -17,6 +17,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :settings
 
+  def working_date (params)
+    params.permit(:year,:month,:day)
+    {year: params[:year], month: params[:month], day: params[:day]}
+  end
+  helper_method :working_date
+
   protected
 
   def flash_message(message, model)
