@@ -18,4 +18,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require_tree .
+//= require partials/bootstrap-plugins
+//= require partials/mask
+//= require partials/timer

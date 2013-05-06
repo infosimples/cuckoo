@@ -4,14 +4,14 @@
 <div class="container row">
 
   <div class="pagination span5">
-    <h2 class='pull-left'><%= @date.strftime("%A, %d %b") %></h2>
+    <h2 class="pull-left"><%= @date.strftime("%A, %d %b") %></h2>
   </div>
 
-  <nav class="span4 pull-right" style="padding: 13px 0;">
+ <nav class="span4 pull-right" id="timesheet-controls">
 
     <ul class="pager span2 pull-right">
-      <li><a href='#' class='icon-calendar'style="margin-top:2px;"></a></li>
-      <li><a href='#' class='icon-user'style="margin-top:2px;"></a></li>
+      <li><a href='#' class="icon-calendar"></a></li>
+      <li><a href='#' class="icon-user"></a></li>
     </ul>
 
     <div class="pagination pull-right">
@@ -20,7 +20,7 @@
           <li class="previous">
             <%= link_to '', timesheet_url(today_date(@date.yesterday)), class: 'icon-arrow-left' %>
           </li>
-          <li <% if @date.to_date == Time.zone.now.to_date %>class="active" <% end %>>
+          <li<%= ' class="active"'.html_safe if @date.to_date == Time.zone.now.to_date %>>
             <%= link_to 'Today', timesheet_url %>
           </li>
           <li class="next">
@@ -43,7 +43,6 @@
         <%= link_to weekday, timesheet_url(today_date(@date.advance({days: constant_day-@date.wday}))) %>
         </a>
       </li>
-<%# debugger %>
     <% end %>
   </ul>
 </div>
@@ -56,7 +55,7 @@
              class: 'btn btn-inverse btn-large entry-position' %>
 
 
-<!-- Table with tehe time entries -->
+<!-- Table with the time entries -->
 <table class="table table-striped table-list">
   <!-- Header of table with the time entries variables -->
   <thead>
@@ -90,7 +89,7 @@
           <td class="row-fluid span6">
             <ul class="breadcrumb row-fluid span10">
 
-           <!-- Project | Task > Description  -->
+              <!-- Project | Task > Description  -->
               <li>
 
                 <% if time_entry.project %>

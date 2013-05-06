@@ -25,7 +25,7 @@ class Timesheet
   end
 
   def day_entries(day = Time.zone.now)
-    TimeEntry.for_user(@user).for_day(day).all
+    TimeEntry.for_user(@user).for_day(day)
   end
 
 end

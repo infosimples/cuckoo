@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-  # GET /blas/1/edit
+  # GET /projects/1/edit
   def edit
   end
 
