@@ -9,6 +9,11 @@ gem 'jbuilder'
 gem 'gravatar_image_tag', '~> 1.1.3'
 gem 'simple_form', '~> 3.0.0.beta1'
 
+# Heroku gems
+
+# Enable features such as static asset serving and logging.
+gem 'rails_12factor', group: :production
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
