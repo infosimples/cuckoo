@@ -16,7 +16,7 @@ module Cuckoo
     # config.time_zone = 'Central Time (US & Canada)'
     # config.time_zone = 'Brasilia'
     config.after_initialize do
-      if Setting.any?
+      if ActiveRecord::Base.connection.table_exists?(Setting.table_name) && Setting.any?
         Time.zone = Setting.first.time_zone
       end
     end
