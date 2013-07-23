@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>First admin. May the force be with you.</h1>
+</div>
+
+<%= simple_form_for(resource, as: resource_name, url: users_create_admin_path, html: { class: 'form-horizontal' }) do |f| %>
+  <%= f.error_notification if f.error_notification %>
+
+  <%= f.input :name, autofocus: true, required: true %>
+  <%= f.input :email, required: true %>
+
+  <%= f.input :password, required: true %>
+  <%= f.input :password_confirmation, required: true %>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Sign up' %>
+  </div>
+<% end %>

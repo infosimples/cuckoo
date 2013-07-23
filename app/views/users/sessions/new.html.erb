@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1>Sign in</h1>
+</div>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
+  <%= f.error_notification if f.error_notification %>
+
+  <%= f.input :email, autofocus: true, required: true %>
+  <%= f.input :password, required: true %>
+  <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Sign in' %>
+  </div>
+<% end %>

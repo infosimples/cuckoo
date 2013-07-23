@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:edit, :update]
 
+  before_filter :allow_admin_only
+
   # GET /projects
   def index
     @projects = Project.all
@@ -11,7 +13,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-  # GET /projects/1/edit
+  # GET /projects/:id/edit
   def edit
   end
 
@@ -47,7 +49,7 @@ class ProjectsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.find_by_id(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

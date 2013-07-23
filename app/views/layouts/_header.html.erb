@@ -6,39 +6,45 @@
     <div class="navbar-inner">
       <div class="container">
         <%= link_to 'Cuckoo'.html_safe, 'https://github.com/kauplus/cuckoo', target: '_blank', class: 'brand', rel: 'tooltip', data: { original_title: 'Fork me on GitHub', placement: 'bottom' } %>
-        <ul class="nav">
-          <li<%= ' class="active"'.html_safe if page_scope == :timesheet %>><%= link_to 'Track Time', timesheet_url %></li>
-          <li<%= ' class="active"'.html_safe if page_scope == :settings %>><%= link_to 'Settings', '/projects' %></li>
-        </ul>
-        <ul class="nav pull-right">
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= gravatar_image_tag('not@spam.com', gravatar: { size: 35 }, class: 'gravatar') %> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li class="nav-header">Donald Knuth </li>
-              <li><%= link_to 'My Account', '#', tabindex: '-1' %></li>
-              <li class="divider"></li>
-              <li><%= link_to 'Sign Out', '#', tabindex: '-1' %></li>
-            </ul>
-          </li>
-        </ul>
+
+        <% if user_signed_in? %>
+          <ul class="nav">
+            <li<%= ' class="active"'.html_safe if page_scope == :timesheet %>><%= link_to 'Track Time', timesheet_url %></li>
+            <% if current_user.is_admin? %>
+              <li<%= ' class="active"'.html_safe if page_scope == :settings %>><%= link_to 'Settings', users_path %></li>
+            <% end %>
+          </ul>
+          <ul class="nav pull-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= gravatar_image_tag(current_user.email, gravatar: { size: 35 }, class: 'gravatar') %> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="nav-header"><%= current_user.name %></li>
+                <li><%= link_to 'My Account', edit_user_path(current_user), tabindex: '-1' %></li>
+                <li class="divider"></li>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, tabindex: '-1' %></li>
+              </ul>
+            </li>
+          </ul>
+        <% end %>
+
       </div>
     </div>
   </div>
 
-
-  <!-- Subnav -->
-  <div class="subnav subnav-fixed">
-    <ul class="nav nav-pills">
-      <% if page_scope == :timesheet %>
-        <li class="active"><%= link_to 'Track', '#' %></li>
-      <% elsif page_scope == :settings %>
-        <li<%= ' class="active"'.html_safe if controller_name == 'users' %>><%= link_to 'Users', '#' %></li>
-        <li<%= ' class="active"'.html_safe if controller_name == 'projects' %>><%= link_to 'Projects', projects_path %></li>
-        <li<%= ' class="active"'.html_safe if controller_name == 'tasks' %>><%= link_to 'Tasks', tasks_path %></li>
-        <li<%= ' class="active"'.html_safe if controller_name == 'settings' %>><%= link_to 'Application', settings_path %></li>
-      <% end %>
-    </ul>
-  </div>
-
+  <% if user_signed_in? %>
+    <!-- Subnav -->
+    <div class="subnav subnav-fixed">
+      <ul class="nav nav-pills">
+        <% if page_scope == :timesheet %>
+          <li class="active"><%= link_to 'Track', '#' %></li>
+        <% elsif page_scope == :settings && current_user.is_admin? %>
+          <li<%= ' class="active"'.html_safe if controller_name == 'users' %>><%= link_to 'Users', users_path %></li>
+          <li<%= ' class="active"'.html_safe if controller_name == 'projects' %>><%= link_to 'Projects', projects_path %></li>
+          <li<%= ' class="active"'.html_safe if controller_name == 'tasks' %>><%= link_to 'Tasks', tasks_path %></li>
+          <li<%= ' class="active"'.html_safe if controller_name == 'settings' %>><%= link_to 'Application', settings_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
 </header>

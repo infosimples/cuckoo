@@ -2,3 +2,6 @@ en:
   flash_messages:
     create_success: '%{model} was successfully created.'
     update_success: '%{model} was successfully updated.'
+    first_admin_created: 'The first admin was created. Sign in to continue.'
+    have_no_right: 'You have no right to perform this action.'
+    timer_not_stopped: 'Could not stop timer.'

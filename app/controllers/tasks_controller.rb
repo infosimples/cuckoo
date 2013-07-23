@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update]
+  before_filter :allow_admin_only
 
   # GET /tasks
   def index
@@ -11,7 +12,7 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
+  # GET /tasks/:id/edit
   def edit
   end
 
@@ -47,7 +48,7 @@ class TasksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task
-    @task = Task.find(params[:id])
+    @task = Task.find_by_id(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -56,9 +57,7 @@ class TasksController < ApplicationController
   end
 
   def flash_message(message)
-    super(message, Project)
+    super(message, Task)
   end
 
 end
-
-

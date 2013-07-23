@@ -5,21 +5,20 @@ class ApplicationController < ActionController::Base
   # TODO: fix for JSON!
   # protect_from_forgery with: :exception
 
-  # TODO: replace with Devise's authenticate_user!
-  before_filter :set_current_user
-
-  def set_current_user
-    @current_user = User.last # for playing with the user.
-  end
+  #
+  # Filters.
+  #
+  before_filter :should_register_first_admin?
+  before_filter :authenticate_user!
 
   def settings
     @settings ||= Setting.first_or_create
   end
   helper_method :settings
 
-  def working_date (params)
+  def working_date(params)
     params.permit(:year,:month,:day)
-    {year: params[:year], month: params[:month], day: params[:day]}
+    { year: params[:year], month: params[:month], day: params[:day] }
   end
   helper_method :working_date
 
@@ -29,5 +28,19 @@ class ApplicationController < ActionController::Base
     I18n.t(message, scope: :flash_messages, model: model.model_name.human)
   end
 
-end
+  #
+  # Checks if it is necessary to create the first admin.
+  #
+  def should_register_first_admin?
+    unless User.any?
+      redirect_to controller: 'users/registrations', action: 'new_admin'
+    end
+  end
 
+  def allow_admin_only
+    unless current_user.is_admin?
+      redirect_to :root
+    end
+  end
+
+end

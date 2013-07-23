@@ -19,9 +19,11 @@
 @import "bootstrap";
 @import "bootswatch/cerulean/bootswatch";
 @import "font-awesome";
+@import "jquery-ui-1.10.3.custom.min";
 
 /* Import partials */
 @import "partials/header";
 @import "partials/footer";
 @import "partials/main";
-@import "partials/jquery.timer";
+@import "partials/timer";
+@import "partials/timesheet";

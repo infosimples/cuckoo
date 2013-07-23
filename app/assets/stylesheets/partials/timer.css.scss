@@ -1,8 +1,7 @@
 .count-holder {
   font: 17px 'Open Sans Condensed',sans-serif;
-  text-align: left;
+  text-align: center;
   letter-spacing: -5px;
-  margin-left: 33%;
 }
 
 .position {
@@ -47,16 +46,6 @@
 
 .count-div-0 { display:none !important; }
 
-.count-hours { }
-
-.count-div-1 { }
-
-.count-minutes { }
-
-.count-div-2 { }
-
-.count-seconds { }
-
 .count-div {
   display:inline-block;
   width: 10px;
@@ -78,6 +67,6 @@
   content: '';
 }
 
-.count-div:after {
-  top:0.9em;
-}
+.count-div:after { top:0.9em; }
+
+#timer-button { margin: 0; }

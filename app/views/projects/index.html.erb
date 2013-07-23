@@ -11,48 +11,45 @@
 
 <br/>
 
-<table class="table table-striped table-list">
-
-  <thead>
-    <tr>
-      <% if @projects.any? %>
+<% if @projects.empty? %>
+  <div class="text-center alert alert-info">
+    <%= t :no_projects %>
+  </div>
+<% else %>
+  <table class="table table-striped table-list">
+    <thead>
+      <tr>
         <th>Name</th>
         <th>Actions</th>
-      <% else %>
-        <th>
-          <div class="text-center alert alert-info">
-            <%= t :no_projects %>
+      </tr>
+    </thead>
+
+    <tbody>
+
+    <% @projects.each do |project| %>
+
+      <tr>
+
+        <td><%= project.name %></td>
+        <td>
+          <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-edit icon-white"></i> Actions
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to '<i class="icon-edit"></i> Edit'.html_safe, edit_project_path(project) %>
+              </li>
+            </ul>
           </div>
-        </th>
-      <% end %>
-    </tr>
-  </thead>
+        </td>
 
-  <tbody>
+      </tr>
 
-  <% @projects.each do |project| %>
+    <% end %>
 
-    <tr>
+    </tbody>
 
-      <td><%= project.name %></td>
-      <td>
-        <div class="btn-group">
-          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-edit icon-white"></i> Actions
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <%= link_to '<i class="icon-edit"></i> Edit'.html_safe, edit_project_path(project) %>
-            </li>
-          </ul>
-        </div>
-      </td>
-
-    </tr>
-
-  <% end %>
-
-  </tbody>
-
-</table>
+  </table>
+<% end %>

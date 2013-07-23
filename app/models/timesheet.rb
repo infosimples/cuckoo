@@ -21,7 +21,7 @@ class Timesheet
   end
 
   def day_hours(day)
-    TimeEntry.for_user(@user).for_day(day).sum(:time_total)
+    TimeEntry.for_user(@user).for_day(day).sum(:total_time)
   end
 
   def day_entries(day = Time.zone.now)

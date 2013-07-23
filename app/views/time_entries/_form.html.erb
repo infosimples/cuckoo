@@ -1,43 +1,35 @@
-<%= simple_form_for(@time_entry, html: {class: 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@time_entry, html: { class: 'form-horizontal' }) do |f| %>
 
-  <% if f.error_notification %>
+  <%= f.error_notification if f.error_notification %>
 
-    <div class="alert alert-error">
-      <%= f.error :base %>
-    </div>
+  <%= f.input :project_id, collection: all_projects, autofocus: true, required: true %>
 
-  <% end %>
+  <%= f.input :task_id, collection: all_tasks, required: true %>
 
-  <%= f.input :project_id, collection: @projects %>
-
-  <%= f.input :task_id, collection: @tasks %>
-
-  <%= f.input :started_at,
-              as: 'string',
+  <%= f.input :start_time,
+              as: :string,
               input_html: { value: @time_entry.started_at && @time_entry.started_at.strftime('%H:%M'),
-                            class: 'time' } %>
+                            class: 'time' },
+              required: true %>
 
-  <%= f.input :ended_at,
-              as: 'string',
+  <%= f.input :end_time,
+              as: :string,
               input_html: { value: @time_entry.ended_at && @time_entry.ended_at.strftime('%H:%M'),
                           class: 'time' } %>
 
   <%= f.input :year,
-              as: 'hidden',
-              input_html: { value: params[:year],
-                            name: :year } %>
+              as: :hidden,
+              input_html: { value: get_date_component(@time_entry, :year), name: 'year' } %>
 
   <%= f.input :month,
-              as: 'hidden',
-              input_html: { value: params[:month],
-                            name: :month } %>
+              as: :hidden,
+              input_html: { value: get_date_component(@time_entry, :month), name: 'month' } %>
 
   <%= f.input :day,
-              as: 'hidden',
-              input_html: { value: params[:day],
-                            name: :day } %>
+              as: :hidden,
+              input_html: { value: get_date_component(@time_entry, :day), name: 'day' } %>
 
-  <%= f.input :description %>
+  <%= f.input :description, as: :text %>
 
   <div class="form-actions">
     <%= f.button :submit %>

@@ -16,8 +16,9 @@
 //= require jquery.maskedinput.min
 //= require jquery.timer
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery-ui-1.10.3.custom.min
 //= require bootstrap
 //= require partials/bootstrap-plugins
 //= require partials/mask
 //= require partials/timer
+//= require partials/timesheet

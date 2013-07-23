@@ -2,6 +2,13 @@ Cuckoo::Application.routes.draw do
 
   root :to => "timesheet#show"
 
+  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_scope :user do
+    get  'users/new_admin'    => 'users/registrations#new_admin'
+    post 'users/create_admin' => 'users/registrations#create_admin'
+  end
+
+  resources :users
   resources :settings, :only => [:index, :update]
   resources :projects, :except => [:show, :destroy]
   resources :tasks, :except => [:show, :destroy]
@@ -10,12 +17,6 @@ Cuckoo::Application.routes.draw do
   patch 'time_entries/:id/finish' => 'time_entries#finish', as: :time_entry_finish
 
   get 'timesheet(/:year/:month/:day)' => 'timesheet#show', as: :timesheet
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root to: 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

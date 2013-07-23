@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130423171812) do
+ActiveRecord::Schema.define(version: 20130722121730) do
 
   create_table "projects", force: true do |t|
     t.string "name"
@@ -31,13 +31,25 @@ ActiveRecord::Schema.define(version: 20130423171812) do
     t.integer  "task_id"
     t.datetime "started_at"
     t.datetime "ended_at"
-    t.integer  "time_total"
+    t.integer  "total_time"
     t.text     "description"
   end
 
   create_table "users", force: true do |t|
-    t.string "name"
-    t.string "email"
+    t.string   "name"
+    t.boolean  "is_admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email",               default: "", null: false
+    t.string   "encrypted_password",  default: "", null: false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

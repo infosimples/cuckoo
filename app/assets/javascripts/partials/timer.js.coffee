@@ -1,21 +1,21 @@
 class TimeWindow
 
-  time = 0
-  mode = 1
-  status = 0
-  timer_interval = undefined
+  time            = 0
+  mode            = 1
+  status          = 0
+  timer_interval  = undefined
 
   constructor: (count_holder) ->
     @positions = count_holder.find('.position')
 
   switchDigit: (position, number) ->
-    digit = undefined
+    digit       = undefined
     replacement = undefined
 
     digit = position.find(".digit")
 
-    return false  if digit.is(":animated")
-    return false  if position.data("digit") is number
+    return false if digit.is(":animated")
+    return false if position.data("digit") is number
 
     position.data "digit", number
 
@@ -57,13 +57,14 @@ class TimeWindow
       , interval)
 
   generateTime: ->
-    second = time % 60
-    minute = Math.floor(time / 60) % 60
-    hour = Math.floor(time / 3600) % 60
-    day = Math.floor(time / 86400) % 60
-    second = (if (second < 10) then "0" + second else second)
-    minute = (if (minute < 10) then "0" + minute else minute)
-    hour = (if (hour < 10) then "0" + hour else hour)
+    second  = time % 60
+    minute  = Math.floor(time / 60) % 60
+    hour    = Math.floor(time / 3600) % 60
+    day     = Math.floor(time / 86400) % 60
+    second  = (if (second < 10) then "0" + second else second)
+    minute  = (if (minute < 10) then "0" + minute else minute)
+    hour    = (if (hour < 10) then "0" + hour else hour)
+
     @updateDuo 0, 1, day
     @updateDuo 2, 3, hour
     @updateDuo 4, 5, minute
@@ -72,7 +73,7 @@ class TimeWindow
   reset: (time_sec) ->
 
     time_sec = (if (typeof (time_sec) isnt "undefined") then time_sec else 0)
-    time = time_sec
+    time     = time_sec
     @generateTime time
 
   stop: ->
@@ -88,25 +89,26 @@ class TimeWindow
 
 $(document).ready (e) ->
   $.each $("div.stopped"), (i) ->
-    time_sec = $(this).attr("data-id")
-    timer = new TimeWindow($(this))
+    time_sec  = $(this).attr("data-id")
+    timer     = new TimeWindow($(this))
+
     timer.reset time_sec
     timer.stop()
 
   $.each $("div.running"), (i) ->
-
-    time_sec = $(this).attr("data-id")
-    timer = new TimeWindow($(this))
+    time_sec  = $(this).attr("data-id")
+    timer     = new TimeWindow($(this))
 
     $(this).data "timer", timer
 
     timer.reset(time_sec)
     timer.start()
 
-  $(".stop_button").click ->
+  $(".stop-button").click ->
     clock = $(this).parent().siblings(".running")
     timer = clock.data("timer")
-    time = timer.getTime()
+    time  = timer.getTime()
+
     clock.removeClass("running").addClass ".stopped"
     clock.attr "data-id", time
     timer.stop()

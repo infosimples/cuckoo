@@ -1,12 +1,14 @@
 class SettingsController < ApplicationController
 
+  before_filter :allow_admin_only
+
   # GET /settings
   # GET /settings.json
   def index
   end
 
-  # PATCH/PUT /settings/1
-  # PATCH/PUT /settings/1.json
+  # PATCH/PUT /settings/:id
+  # PATCH/PUT /settings/:id.json
   def update
     respond_to do |format|
       if settings.update(setting_params)
@@ -20,8 +22,9 @@ class SettingsController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def setting_params
-      params.require(:setting).permit(:time_zone)
-    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def setting_params
+    params.require(:setting).permit(:time_zone)
+  end
 end
