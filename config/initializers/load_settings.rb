@@ -1,2 +1,0 @@
-setting = Setting.first_or_initialize
-setting.setup_time_zone

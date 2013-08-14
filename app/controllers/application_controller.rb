@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
   #
   # Filters.
   #
-  before_filter :should_register_first_admin?
-  before_filter :authenticate_user!
+  before_filter :set_user_time_zone, :should_register_first_admin?, :authenticate_user!
 
   def settings
     @settings ||= Setting.first_or_create
@@ -26,6 +25,10 @@ class ApplicationController < ActionController::Base
 
   def flash_message(message, model)
     I18n.t(message, scope: :flash_messages, model: model.model_name.human)
+  end
+
+  def set_user_time_zone
+    Setting.first_or_initialize.setup_time_zone
   end
 
   #
