@@ -26,7 +26,10 @@
       <tr>
 
         <td><%= gravatar_image_tag(user.email, gravatar: { size: 35 }, class: 'gravatar') %></td>
-        <td><%= user.name %></td>
+        <td>
+          <%= user.name %>
+          <% if user.is_admin %><span class="label label-warning">admin</span><% end %>
+        </td>
         <td><%= user.email %></td>
         <td><%= l user.created_at, format: :short %></td>
         <td>

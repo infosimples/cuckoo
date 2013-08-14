@@ -1,13 +1,5 @@
 module TimeEntriesHelper
 
-  def all_projects
-    Project.all
-  end
-
-  def all_tasks
-    Task.all
-  end
-
   #
   # `arg` should be one of :day, :month or :year
   #

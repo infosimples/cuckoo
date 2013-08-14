@@ -2,9 +2,9 @@
 
   <%= f.error_notification if f.error_notification %>
 
-  <%= f.input :project_id, collection: all_projects, autofocus: true, required: true %>
+  <%= f.association :project, autofocus: true %>
 
-  <%= f.input :task_id, collection: all_tasks, required: true %>
+  <%= f.association :task %>
 
   <%= f.input :start_time,
               as: :string,

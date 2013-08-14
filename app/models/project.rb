@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  default_scope { order(:name) }
 
   before_destroy :check_associations_are_empty
 

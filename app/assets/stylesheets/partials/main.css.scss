@@ -17,18 +17,24 @@
   }
 }
 
-.table th:first-child {
-  text-align: left;
+.table.table-timesheet {
+  th:first-child {
+    text-align: left;
+  }
+  th, td {
+    text-align: center;
+  }
+  th:first-child, td:first-child {
+    text-align: left;
+  }
 }
 
-.table th, .table td {
-  vertical-align: middle;
-  text-align: center;
+.table {
+  th, td {
+    vertical-align: middle;
+  }
 }
 
-.table th:first-child, .table td:first-child {
-  text-align: left;
-}
 
 .breadcrumb {
   padding: 5px 20px;

@@ -61,7 +61,7 @@
   <div class="text-center alert alert-info"><%= t :no_time_entry %></div>
 <% else %>
   <!-- Table with the time entries -->
-  <table class="table table-striped table-list">
+  <table class="table table-striped table-list table-timesheet">
     <!-- Header of table with the time entries variables -->
     <thead>
       <tr>
@@ -80,34 +80,15 @@
               <!-- Project | Task > Description  -->
               <li>
 
-                <% if time_entry.project %>
-                  <blockquote class="pull-left">
-                    <p class="pull-left">
-                      <%= time_entry.project.name %>
-                    </p>
-                  </blockquote>
-                <% end %>
+                <div class="time-entry-title">
+                  <%= time_entry.project.name %><span class="divider">|</span><%= time_entry.task.name %>
+                  <% if time_entry.description.present? %><span class="divider">></span><% end %>
+                </div>
 
-                <% if time_entry.task %>
-                  <% if time_entry.project %>
-                    <span class="divider pull-left">|</span>
-                  <% end %>
-                  <blockquote class="pull-left">
-                    <p class="pull-left">
-                      <%= time_entry.task.name %>
-                    </p>
-                  </blockquote>
-                <% end %>
-
-                <% unless time_entry.description.empty? %>
-                  <% if time_entry.project || time_entry.task %>
-                    <span class="divider pull-left">></span>
-                  <% end %>
-                  <blockquote class="pull-left">
-                    <p class="pull-left">
-                      <%= time_entry.description %>
-                    </p>
-                  </blockquote>
+                <% if time_entry.description.present? %>
+                  <div class="time-entry-description">
+                    <%= simple_format time_entry.description %>
+                  </div>
                 <% end %>
 
               </li>

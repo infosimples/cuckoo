@@ -2,10 +2,15 @@ class Setting < ActiveRecord::Base
 
   store :settings, accessors: [ :time_zone ]
 
+  after_save :setup_time_zone
+
   after_initialize do
-    self.time_zone ||= 'Brasilia'
+    self.time_zone ||= 'Brasilia' # Default time zone
   end
-  after_save do
-    Time.zone = Setting.first.time_zone
+
+  def setup_time_zone
+    Rails.application.config.time_zone = self.time_zone
+    Time.zone = self.time_zone
   end
+
 end
