@@ -47,12 +47,21 @@
 
   <!-- Header of table with weekdays synchronized with primary menu above and the DB in table below -->
   <div class="pagination pagination-large pull-right">
-    <ul>
-      <% Date::DAYNAMES.each_with_index do |weekday, constant_day| %>
-        <li <% if constant_day == @date.wday %> class="active" <% end %>>
-          <%= link_to weekday, timesheet_url(today_date(@date.advance({ days: constant_day - @date.wday }))) %>
+    <ul id="weekdays-list">
+      <% @weekdays.each do |weekday| %>
+        <li <% if weekday.day == @date.day %> class="active" <% end %>>
+          <%= link_to timesheet_url(today_date(@date.advance({ days: (weekday - @date).days }))) do %>
+            <%= weekday.strftime('%A') %><br>
+            <span class="day-time">(<%= hours_and_minutes(@week_summary[weekday.day]) %>)</span>
+          <% end %>
         </li>
       <% end %>
+      <li>
+        <%= link_to '#' do %>
+          Total<br>
+          <span class="day-time">(<%= hours_and_minutes(@week_summary.values.sum) %>)</span>
+        <% end %>
+      </li>
     </ul>
   </div>
 </div>

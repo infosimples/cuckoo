@@ -4,23 +4,14 @@ class Timesheet
     @user = user
   end
 
-  def week_hours(week_day = Time.zone.now)
-    # TODO: needs refactoring!
+  def week_hours(day = Time.zone.now)
+    day  = day.to_date
+    week = (day.at_beginning_of_week..day.at_end_of_week)
 
-    range = week_day.all_week
-    day   = range.first
-    hsh   = {}
-
-    begin
-      hsh[day] = day_hours(day)
-      day += 1.day
-    end while day <= range.last
-
-    hsh
-
+    week.map { |weekday| { weekday.day => day_time(weekday) } }.reduce(:merge)
   end
 
-  def day_hours(day)
+  def day_time(day)
     TimeEntry.for_user(@user).for_day(day).sum(:total_time)
   end
 

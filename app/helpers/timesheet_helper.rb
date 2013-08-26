@@ -26,4 +26,11 @@ module TimesheetHelper
     end.ceil
   end
 
+  def hours_and_minutes(seconds)
+    minutes = seconds/60
+    hours   = minutes/60
+
+    "#{hours.to_s.rjust(2, '0')}:#{(minutes % 60).to_s.rjust(2, '0')}"
+  end
+
 end
