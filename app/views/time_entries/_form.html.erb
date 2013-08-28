@@ -6,6 +6,10 @@
 
   <%= f.association :task %>
 
+  <%= f.input :is_billable,
+              label: 'Billable hour?',
+              as: :boolean %>
+
   <%= f.input :start_time,
               as: :string,
               input_html: { value: @time_entry.started_at && @time_entry.started_at.strftime('%H:%M'),

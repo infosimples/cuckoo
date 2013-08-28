@@ -16,6 +16,8 @@
   <%= f.input :task_id, collection: all_tasks.map { |t| [t.name, t.id] },
       required: false %>
 
+  <%= f.input :is_billable, label: 'Billable hour only', as: :boolean %>
+
   <div>
     <span class="inline">
       <%= f.input :start_date %>

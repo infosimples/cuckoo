@@ -90,6 +90,7 @@
               <li>
 
                 <div class="time-entry-title">
+                  <% if time_entry.is_billable? %><span class="label label-info">Billable</span><% end %>
                   <%= time_entry.project.name %><span class="divider">|</span><%= time_entry.task.name %>
                   <% if time_entry.description.present? %><span class="divider">></span><% end %>
                 </div>

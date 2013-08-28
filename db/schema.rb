@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130722121730) do
+ActiveRecord::Schema.define(version: 20130828165639) do
 
   create_table "projects", force: true do |t|
     t.string "name"
@@ -33,7 +33,10 @@ ActiveRecord::Schema.define(version: 20130722121730) do
     t.datetime "ended_at"
     t.integer  "total_time"
     t.text     "description"
+    t.boolean  "is_billable", default: false
   end
+
+  add_index "time_entries", ["is_billable"], name: "index_time_entries_on_is_billable", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

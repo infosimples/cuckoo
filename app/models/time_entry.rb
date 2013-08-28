@@ -10,6 +10,7 @@ class TimeEntry < ActiveRecord::Base
   belongs_to :task
 
   validates_presence_of :project, :task, :started_at
+  validates_inclusion_of :is_billable, in: [true, false]
   validate :start_and_end_are_in_order
 
   before_validation :set_time_parameters

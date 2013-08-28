@@ -65,7 +65,7 @@ class TimeEntriesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def time_entry_params
-    args = params.require(:time_entry).permit(:project_id, :task_id, :description, :start_time, :end_time)
+    args = params.require(:time_entry).permit(:project_id, :task_id, :description, :start_time, :end_time, :is_billable)
 
     hsh = params[:time_entry]
 

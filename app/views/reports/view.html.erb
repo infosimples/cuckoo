@@ -20,6 +20,9 @@
   <% end %>
   <p><strong>Total time:</strong> <%= total_time_info(@total_time) %></p>
   <p><strong>Total entries:</strong> <%= @time_entries.size %></p>
+  <% if @is_billable %>
+    <p>Including only billable hours.</p>
+  <% end %>
   <p>This report was generated on <strong><%= Time.now.strftime('%c') %></strong>.</p>
 </div>
 

@@ -34,6 +34,11 @@ class ReportsController < ApplicationController
       @task         = Task.find_by_id(report_params[:task_id])
     end
 
+    if report_params[:is_billable] == '1'
+      @time_entries = @time_entries.where(is_billable: true)
+      @is_billable  = true
+    end
+
     @total_time = @time_entries.sum(:total_time)
 
   end
@@ -42,7 +47,7 @@ class ReportsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def report_params
-    params.require(:report).permit(:project_id, :user_id, :task_id, :start_date, :end_date)
+    params.require(:report).permit(:project_id, :user_id, :task_id, :start_date, :end_date, :is_billable)
   end
 
 end
