@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h1>New Report</h1>
+</div>
+
+<div id="datepicker-start-date" class="hide datepicker"></div>
+<div id="datepicker-end-date" class="hide datepicker"></div>
+
+<%= simple_form_for(:report, html: { class: 'form-horizontal' }) do |f| %>
+
+  <%= f.input :project_id, collection: all_projects.map { |p| [p.name, p.id] },
+      required: false, autofocus: true %>
+
+  <%= f.input :user_id, collection: all_users.map { |u| [u.name, u.id] },
+      required: false %>
+
+  <%= f.input :task_id, collection: all_tasks.map { |t| [t.name, t.id] },
+      required: false %>
+
+  <div>
+    <span class="inline">
+      <%= f.input :start_date %>
+    </span>
+    <span class="inline">
+      <ul class="pager">
+        <li><a href="#" class="icon-calendar start-date"></a></li>
+      </ul>
+    </span>
+  </div>
+
+  <div>
+    <span class="inline">
+      <%= f.input :end_date %>
+    </span>
+    <span class="inline">
+      <ul class="pager">
+        <li><a href="#" class="icon-calendar end-date"></a></li>
+      </ul>
+    </span>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'View report' %>
+  </div>
+
+<% end %>

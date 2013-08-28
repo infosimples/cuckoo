@@ -27,10 +27,12 @@ module TimesheetHelper
   end
 
   def hours_and_minutes(seconds)
-    minutes = seconds/60
-    hours   = minutes/60
+    if seconds.is_a?(Fixnum)
+      minutes = seconds/60
+      hours   = minutes/60
 
-    "#{hours.to_s.rjust(2, '0')}:#{(minutes % 60).to_s.rjust(2, '0')}"
+      return "#{hours.to_s.rjust(2, '0')}:#{(minutes % 60).to_s.rjust(2, '0')}"
+    end
   end
 
 end

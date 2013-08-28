@@ -18,6 +18,9 @@ Cuckoo::Application.routes.draw do
 
   get 'timesheet(/:year/:month/:day)' => 'timesheet#show', as: :timesheet
 
+  get 'reports' => 'reports#new', as: :reports
+  post 'reports' => 'reports#view'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

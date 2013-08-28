@@ -12,4 +12,5 @@ class TimesheetController < ApplicationController
       redirect_to timesheet_url(year: date.year, month: date.month, day: date.day)
     end
   end
+
 end

@@ -36,6 +36,7 @@ en:
   no_projects: "There is no project"
   no_tasks: "There is no task"
   no_time_entry: "There is no time entry this day"
+  empty_report: "No time entry match the criteria"
 
   active_record:
 

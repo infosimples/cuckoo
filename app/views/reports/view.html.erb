@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h1>Time report</h1>
+</div>
+
+<div class="well">
+  <% if @project.present? %>
+    <p><strong>Project:</strong> <%= @project.name %></p>
+  <% end %>
+  <% if @user.present? %>
+    <p><strong>User:</strong> <%= @user.name %></p>
+  <% end %>
+  <% if @task.present? %>
+    <p><strong>Task:</strong> <%= @task.name %></p>
+  <% end %>
+  <% if @start_date.present? %>
+    <p><strong>From:</strong> <%= @start_date %></p>
+  <% end %>
+  <% if @end_date.present? %>
+    <p><strong>To:</strong> <%= @end_date %></p>
+  <% end %>
+  <p><strong>Total time:</strong> <%= total_time_info(@total_time) %></p>
+  <p><strong>Total entries:</strong> <%= @time_entries.size %></p>
+  <p>This report was generated on <strong><%= Time.now.strftime('%c') %></strong>.</p>
+</div>
+
+<% if @time_entries.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Date</th>
+        <th>Resource</th>
+        <th>Task</th>
+        <th>Duration</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @time_entries.each do |time_entry| %>
+        <tr>
+          <td><%= time_entry.project.name %></td>
+          <td><%= time_entry.started_at.strftime("%d/%m/%Y") %></td>
+          <td><%= time_entry.user.name %></td>
+          <td><%= time_entry.task.name %></td>
+          <td><%= hours_and_minutes(time_entry.total_time) %></td>
+          <td><%= time_entry.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="text-center alert alert-info">
+    <%= t :empty_report %>
+  </div>
+<% end %>

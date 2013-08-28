@@ -22,3 +22,4 @@
 //= require partials/mask
 //= require partials/timer
 //= require partials/timesheet
+//= require partials/reports
