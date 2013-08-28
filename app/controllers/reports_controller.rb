@@ -10,8 +10,8 @@ class ReportsController < ApplicationController
     @time_entries = TimeEntry.all
 
     if report_params[:start_date].present?
-      @time_entries    = relation.where('DATE(started_at) >= ?', "#{report_params[:start_date]}")
-      @start_date = Date.parse(report_params[:start_date]).strftime("%B %d, %Y")
+      @time_entries = @time_entries.where('DATE(started_at) >= ?', "#{report_params[:start_date]}")
+      @start_date   = Date.parse(report_params[:start_date]).strftime("%B %d, %Y")
     end
 
     if report_params[:end_date].present?
