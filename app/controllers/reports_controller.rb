@@ -7,7 +7,7 @@ class ReportsController < ApplicationController
   # POST /reports
   def view
 
-    @time_entries = TimeEntry.all
+    @time_entries = TimeEntry.order(:started_at)
 
     if report_params[:start_date].present?
       @time_entries = @time_entries.where('DATE(started_at) >= ?', "#{report_params[:start_date]}")
