@@ -8,6 +8,8 @@
   <%= f.input :name, autofocus: true, required: true %>
   <%= f.input :email, required: true %>
 
+  <%= f.input :time_zone, include_blank: false, priority: /UTC/ %>
+
   <%= f.input :password, required: true %>
   <%= f.input :password_confirmation, required: true %>
 

@@ -31,7 +31,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def registration_params
-    params.require(:user).permit(:name, :email, :is_admin, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :is_admin, :password,
+                                 :password_confirmation, :time_zone)
   end
 
   def flash_message(message)

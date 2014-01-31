@@ -11,14 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828165639) do
+ActiveRecord::Schema.define(version: 20140203102243) do
 
   create_table "projects", force: true do |t|
     t.string "name"
-  end
-
-  create_table "settings", force: true do |t|
-    t.text "settings"
   end
 
   create_table "tasks", force: true do |t|
@@ -51,6 +47,7 @@ ActiveRecord::Schema.define(version: 20130828165639) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "time_zone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
