@@ -6,7 +6,8 @@ module TimesheetHelper
       time_entry: {
         project_id: time_entry.project_id,
         task_id: time_entry.task_id,
-        description: time_entry.description
+        description: time_entry.description,
+        is_billable: time_entry.is_billable?
       }
     }
     link_to 'Start', time_entries_path(today_date.merge(hsh)), method: :post, class: css_class
