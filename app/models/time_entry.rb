@@ -3,7 +3,12 @@ class TimeEntry < ActiveRecord::Base
   attr_accessor :entry_date, :start_time, :end_time
 
   scope :for_user, lambda { |user| where(user_id: user.id) }
-  scope :for_day, lambda { |day| where('started_at > ? AND started_at < ?', day, day.tomorrow).order('started_at') }
+  scope :for_day, (lambda do |day|
+                            at_gmtime = day.at_midnight.gmtime
+                            where('started_at >= ? AND started_at < ?',
+                                  at_gmtime,
+                                  at_gmtime.tomorrow).order('started_at')
+                          end)
 
   belongs_to :user
   belongs_to :project
