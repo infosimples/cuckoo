@@ -36,7 +36,7 @@
     <div class="subnav subnav-fixed">
       <ul class="nav nav-pills">
         <% if page_scope == :timesheet %>
-          <li<%= ' class="active"'.html_safe if controller_name == 'timesheet' %>><%= link_to 'Track', timesheet_path %></li>
+          <li<%= ' class="active"'.html_safe if ['timesheet','time_entries'].include? controller_name %>><%= link_to 'Track', timesheet_path %></li>
           <% if current_user.is_admin? %>
             <li<%= ' class="active"'.html_safe if controller_name == 'reports' %>><%= link_to 'Reports', reports_path %></li>
           <% end %>
