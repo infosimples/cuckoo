@@ -8,7 +8,7 @@ Cuckoo::Application.routes.draw do
     post 'users/create_admin' => 'users/registrations#create_admin'
   end
 
-  resources :users
+  resources :users, :except => [:destroy]
   resources :settings, :only => [:index, :update]
   resources :projects, :except => [:show, :destroy]
   resources :tasks, :except => [:show, :destroy]

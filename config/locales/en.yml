@@ -48,3 +48,7 @@ en:
 
           start_and_end_must_be_same_day: Timesheet entries must begin and end on the same day.
           start_and_end_must_be_in_order: Can't end timsheet entry before its start
+
+  devise:
+    failure:
+      deactivated: "Your account was deactivated."

@@ -16,4 +16,14 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :email
   validates_uniqueness_of :email
   validates_inclusion_of :is_admin, in: [true, false]
+  validates_inclusion_of :is_active, in: [true, false]
+
+  def active_for_authentication?
+    super && self.is_active
+  end
+
+  def inactive_message
+    self.is_active ? super : :deactivated
+  end
+
 end
