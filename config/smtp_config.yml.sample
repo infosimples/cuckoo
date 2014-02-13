@@ -1,0 +1,27 @@
+
+development:
+  tls: true
+  address: addresss
+  port: port
+  authentication: :plain
+  user_name: username
+  password: password
+  from_email: cuckoo@email.com
+
+test:
+  tls: true
+  address: addresss
+  port: port
+  authentication: :plain
+  user_name: username
+  password: password
+  from_email: cuckoo@email.com
+
+production:
+  tls: true
+  address: addresss
+  port: port
+  authentication: :plain
+  user_name: username
+  password: password
+  from_email: cuckoo@email.com

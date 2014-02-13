@@ -18,3 +18,5 @@
 # Ignore user profile files
 /.rvmrc
 .DS_Store
+
+/config/smtp_config.yml

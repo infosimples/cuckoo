@@ -23,3 +23,4 @@
 //= require partials/timer
 //= require partials/timesheet
 //= require partials/reports
+//= require partials/users

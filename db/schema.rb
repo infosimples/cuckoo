@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204141711) do
+ActiveRecord::Schema.define(version: 20140307172800) do
 
   create_table "projects", force: true do |t|
     t.string "name"
@@ -39,18 +39,22 @@ ActiveRecord::Schema.define(version: 20140204141711) do
     t.boolean  "is_admin"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",               default: "",   null: false
-    t.string   "encrypted_password",  default: "",   null: false
+    t.string   "email",                             default: "",    null: false
+    t.string   "encrypted_password",                default: "",    null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",       default: 0
+    t.integer  "sign_in_count",                     default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "time_zone"
-    t.boolean  "is_active",           default: true
+    t.boolean  "is_active",                         default: true
+    t.boolean  "subscriber_to_admin_summary_email", default: false
+    t.boolean  "subscriber_to_user_summary_email",  default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["subscriber_to_admin_summary_email"], name: "index_users_on_subscriber_to_admin_summary_email", using: :btree
+  add_index "users", ["subscriber_to_user_summary_email"], name: "index_users_on_subscriber_to_user_summary_email", using: :btree
 
 end
