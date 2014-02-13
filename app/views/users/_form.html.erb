@@ -4,6 +4,8 @@
 
   <%= f.input :name, autofocus: true %>
   <%= f.input :email %>
+  <%= f.input :time_zone, include_blank: false, priority: /UTC/ %>
+
   <% if current_user.is_admin %>
     <%= f.input :is_admin, label: 'Is admin?', as: :boolean %>
     <%= f.input :is_active, label: 'Is active?', as: :boolean %>
