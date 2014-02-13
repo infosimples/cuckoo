@@ -29,6 +29,7 @@
         <td>
           <%= user.name %>
           <% if user.is_admin %><span class="label label-warning">admin</span><% end %>
+          <% if !user.is_active %><span class="label label-default">inactive</span><% end %>
         </td>
         <td><%= user.email %></td>
         <td><%= l user.created_at, format: :short %></td>
@@ -42,7 +43,10 @@
               <li>
                 <%= link_to '<i class="icon-edit"></i> Edit'.html_safe, edit_user_path(user) %>
               </li>
-              <li class="divider"></link>
+              <li class="divider"></li>
+              <li>
+                <%= link_to ('<i class="icon-off"></i> ' + (user.is_active ? 'Deactivate' : 'Activate')).html_safe, user_path(user, { user: { is_active: !user.is_active } }), method: :patch %>
+              </li>
               <li>
                 <%= link_to '<i class="icon-trash"></i> Delete'.html_safe, user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
               </li>
