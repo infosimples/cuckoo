@@ -9,7 +9,7 @@
 
         <% if user_signed_in? %>
           <ul class="nav">
-            <li<%= ' class="active"'.html_safe if page_scope == :timesheet %>><%= link_to 'Track Time', timesheet_url %></li>
+            <li<%= ' class="active"'.html_safe if page_scope == :timesheet %>><%= link_to 'Track Time', timesheet_url(current_user.id) %></li>
             <% if current_user.is_admin? %>
               <li<%= ' class="active"'.html_safe if page_scope == :settings %>><%= link_to 'Settings', users_path %></li>
             <% end %>
@@ -36,7 +36,7 @@
     <div class="subnav subnav-fixed">
       <ul class="nav nav-pills">
         <% if page_scope == :timesheet %>
-          <li<%= ' class="active"'.html_safe if ['timesheet','time_entries'].include? controller_name %>><%= link_to 'Track', timesheet_path %></li>
+          <li<%= ' class="active"'.html_safe if ['timesheet','time_entries'].include? controller_name %>><%= link_to 'Track', timesheet_path(current_user.id) %></li>
           <% if current_user.is_admin? %>
             <li<%= ' class="active"'.html_safe if controller_name == 'reports' %>><%= link_to 'Reports', reports_path %></li>
           <% end %>

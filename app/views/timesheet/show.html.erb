@@ -1,8 +1,16 @@
+<!-- Sets user id to be used in timesheet.js/datepicker() -->
+<script type="text/javascript">
+  var timesheet_user_id = <%= @timesheet.user.id %>
+</script>
+
 <!-- Primary menu with the datetime, days control, calendar and user -->
 <div class="container row">
 
   <div class="pagination span5">
-    <h2 class="pull-left"><%= @date.strftime("%A, %d %b") %></h2>
+    <h2 class="pull-left">
+      <%= @timesheet.date.strftime("%A, %d %b") %>
+      <span class="label label-warning"><%= @timesheet.user.name %></span>
+    </h2>
   </div>
 
   <div class="span7 pull-right" id="timesheet-controls">
@@ -10,9 +18,18 @@
     <div id="datepicker" class="hide"></div>
 
     <ul class="pager pull-right">
-      <li><a href='#' class="icon-calendar"></a></li>
+      <li><a href="#" class="icon-calendar"></a></li>
       <% if current_user.is_admin? %>
-        <li><a href='#' class="icon-user"></a></li>
+        <li class="dropdown">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+            <span class="icon-user"></span>
+          </a>
+          <ul class="dropdown-menu" id="users-list">
+            <% @users.each do |user| %>
+              <li><%= link_to user.name, timesheet_url(user.id) %></li>
+            <% end %>
+          </ul>
+        </li>
       <% end %>
     </ul>
 
@@ -20,13 +37,13 @@
 
       <ul>
         <li class="previous">
-          <%= link_to '', timesheet_url(today_date(@date.yesterday)), class: 'icon-arrow-left' %>
+          <%= link_to '', timesheet_url(today_date(@timesheet.date.yesterday)), class: 'icon-arrow-left' %>
         </li>
-        <li<%= ' class="active"'.html_safe if @date.to_date == Time.zone.now.to_date %>>
+        <li<%= ' class="active"'.html_safe if @timesheet.date.to_date == Time.zone.now.to_date %>>
           <%= link_to 'Today', timesheet_url %>
         </li>
         <li class="next">
-          <%= link_to '', timesheet_url(today_date(@date.tomorrow)), class: 'icon-arrow-right' %>
+          <%= link_to '', timesheet_url(today_date(@timesheet.date.tomorrow)), class: 'icon-arrow-right' %>
         </li>
       </ul>
 
@@ -48,25 +65,25 @@
   <!-- Header of table with weekdays synchronized with primary menu above and the DB in table below -->
   <div class="pagination pagination-large pull-right">
     <ul id="weekdays-list">
-      <% @weekdays.each do |weekday| %>
-        <li <% if weekday.day == @date.day %> class="active" <% end %>>
-          <%= link_to timesheet_url(today_date(@date.advance({ days: (weekday - @date).days }))) do %>
+      <% @timesheet.weekdays.each do |weekday| %>
+        <li <% if weekday.day == @timesheet.date.day %> class="active" <% end %>>
+          <%= link_to timesheet_url(today_date(@timesheet.date.advance({ days: (weekday - @timesheet.date).days }))) do %>
             <%= weekday.strftime('%A') %><br>
-            <span class="day-time">(<%= hours_and_minutes(@week_summary[weekday.day]) %>)</span>
+            <span class="day-time">(<%= hours_and_minutes(@timesheet.week_summary[weekday.day]) %>)</span>
           <% end %>
         </li>
       <% end %>
       <li>
         <%= link_to '#' do %>
           Total<br>
-          <span class="day-time">(<%= hours_and_minutes(@week_summary.values.sum) %>)</span>
+          <span class="day-time">(<%= hours_and_minutes(@timesheet.week_summary.values.sum) %>)</span>
         <% end %>
       </li>
     </ul>
   </div>
 </div>
 
-<% if @day_entries.empty? %>
+<% if @timesheet.day_entries.empty? %>
   <div class="text-center alert alert-info"><%= t :no_time_entry %></div>
 <% else %>
   <!-- Table with the time entries -->
@@ -81,7 +98,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @day_entries.each do |time_entry| %>
+      <% @timesheet.day_entries.each do |time_entry| %>
         <tr>
           <td class="row-fluid span6">
             <ul class="breadcrumb row-fluid span10">
@@ -180,7 +197,7 @@
           </td>
         </tr>
 
-      <% end %><!-- end for @day_entries loop -->
+      <% end %><!-- end for @timesheet.day_entries loop -->
 
     </tbody>
 

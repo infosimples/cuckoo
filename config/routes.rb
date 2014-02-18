@@ -15,7 +15,7 @@ Cuckoo::Application.routes.draw do
 
   patch 'time_entries/:id/finish' => 'time_entries#finish', as: :time_entry_finish
 
-  get 'timesheet(/:year/:month/:day)' => 'timesheet#show', as: :timesheet
+  get 'timesheet/:user_id(/:year/:month/:day)' => 'timesheet#show', as: :timesheet
 
   get 'reports' => 'reports#new', as: :reports
   post 'reports' => 'reports#view'
