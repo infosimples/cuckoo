@@ -47,9 +47,6 @@
               <li>
                 <%= link_to ('<i class="icon-off"></i> ' + (user.is_active ? 'Deactivate' : 'Activate')).html_safe, user_path(user, { user: { is_active: !user.is_active } }), method: :patch %>
               </li>
-              <li>
-                <%= link_to '<i class="icon-trash"></i> Delete'.html_safe, user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
-              </li>
             </ul>
           </div>
         </td>
