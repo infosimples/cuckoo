@@ -13,8 +13,7 @@
   <%= f.input :start_time,
               as: :string,
               input_html: { value: @time_entry.started_at && @time_entry.started_at.strftime('%H:%M'),
-                            class: 'time' },
-              required: true %>
+                            class: 'time' } %>
 
   <%= f.input :end_time,
               as: :string,
@@ -33,7 +32,7 @@
               as: :hidden,
               input_html: { value: get_date_component(@time_entry, :day), name: 'day' } %>
 
-  <%= f.input :description, as: :text %>
+  <%= f.input :description, as: :text, :input_html => { :class => 'time_entry_form' }%>
 
   <div class="form-actions">
     <%= f.button :submit %>
