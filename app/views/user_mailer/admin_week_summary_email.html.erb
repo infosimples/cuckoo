@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <% @users.each do |user| %>
+      <div style="font-size:2em"><%= user.name %></div><br>
+      <div style="left-padding:1.2em">
+        <%= render 'week_summary', summary: Report.new(user).week_summary %>
+      </div><br>
+    <% end %>
+  </body>
+</html>

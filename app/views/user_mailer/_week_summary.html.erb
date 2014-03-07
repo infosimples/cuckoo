@@ -1,0 +1,65 @@
+<!-- Table with week hours -->
+<table>
+  <tr>
+    <% summary[:weekdays].each do |weekday| %>
+      <td style="text-align:center; color:#555">
+        <%= weekday.strftime('%A') %><br>
+        <span>(<%= hours_and_minutes(summary[:week_hours][weekday.day]) %>)</span>
+      </td>
+    <% end %>
+    <td style="text-align:center">
+      Total<br>
+      <span>(<%= hours_and_minutes(summary[:week_hours].values.sum) %>)</span>
+    </td>
+  </tr>
+</table>
+
+<% if summary[:time_summary].empty? %>
+  <br>
+  <div><%= t :no_time_entry %></div>
+<% else %>
+  <!-- Table with time spent on each project and tasks -->
+  <table style="text-align:center">
+    <tbody>
+      <% summary[:time_summary].each do |project, info| %>
+        <tr>
+          <td style="text-align:left; min-width:250px">
+            <ul style="list-style-type:none; padding-left:0px">
+              <!-- Project | Task > Description  -->
+              <li style="text-align:left; margin:0px">
+
+                <div style="font-size:1.25em; font-weight:bold">
+                  <%= project %>
+                </div>
+
+              </li>
+
+            </ul>
+          </td>
+
+          <td>
+
+            <div style="font-size:1.25em; font-weight:bold">
+              <%= hours_and_minutes(info[:total]) %>
+            </div>
+
+          </td>
+
+        </tr>
+
+        <tr style="text-align:left">
+          <td style="padding-left:8px; max-width:450px">
+            <% info[:tasks].each do |task, duration| %>
+              <span div style="font-size:1em">
+                <%= task %> (<%= hours_and_minutes(duration) %>)
+              </span><br>
+            <% end %>
+          </td>
+        </tr>
+
+      <% end %><!-- end for day_entries loop -->
+
+    </tbody>
+
+  </table>
+<% end %>

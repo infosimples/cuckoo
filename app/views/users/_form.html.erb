@@ -14,6 +14,13 @@
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
 
+  <%= f.input :subscriber_to_user_summary_email, as: :boolean %>
+
+  <% if current_user.is_admin %>
+    <%= f.input :subscriber_to_admin_summary_email, as: :boolean,
+                    wrapper_html: { id: 'subscription_to_admin' } %>
+  <% end %>
+
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
