@@ -29,5 +29,4 @@ Cuckoo::Application.configure do
 
   # Set default url options in your environments files.
   # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
 end
