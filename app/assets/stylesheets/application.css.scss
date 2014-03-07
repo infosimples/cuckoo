@@ -22,10 +22,11 @@
 @import "jquery-ui-1.10.3.custom.min";
 
 /* Import partials */
+@import "partials/loading";
 @import "partials/header";
 @import "partials/footer";
 @import "partials/main";
 @import "partials/timer";
 @import "partials/timesheet";
 @import "partials/reports";
-@import "partials/time_entry"
+@import "partials/time_entry_form";

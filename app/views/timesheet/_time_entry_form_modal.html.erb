@@ -1,0 +1,82 @@
+<div class="modal fade" id="timeEntryModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none">
+  <%= simple_form_for(TimeEntry.new, format: :json, remote: true) do |f| %>
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title new-time-form">New Time Entry</h4>
+          <h4 class="modal-title edit-time-form hide">Edit Time Entry</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="container-fluid">
+
+            <div id="time-entry-form-errors" class="hide alert alert-error">
+              <span>Please review the problems below:</span>
+              <div class="messages">
+              </div>
+            </div>
+
+            <div class="row-fluid">
+
+              <div class="span6">
+                <%= f.association :project, autofocus: true, input_html: { :id => 'time-entry-project' } %>
+              </div>
+
+              <div class="span6">
+                <%= f.association :task, input_html: { :id => 'time-entry-task' } %>
+              </div>
+
+            </div>
+
+            <div class="row-fluid">
+
+              <div class="span8">
+                <%= f.input :description, as: :text,
+                            :input_html => { :id => 'time-entry-description', class: 'span12' } %>
+              </div>
+
+              <div class="span4">
+                <div class="span6">
+                <%= f.input :start_time, as: :string,
+                            input_html: {
+                              :id => 'time-entry-start-time',
+                              class: 'time span12'
+                            } %>
+                </div>
+
+                <div class="span6">
+                <%= f.input :end_time, as: :string,
+                            input_html: {
+                              :id => 'time-entry-end-time',
+                              class: 'time span12'
+                            } %>
+                </div>
+
+                <%= f.input :is_billable, label: 'Billable hour?',
+                        as: :boolean, input_html: { :id => 'time-entry-is-billable' } %>
+              </div>
+            </div>
+
+            <%= hidden_field_tag :year, params[:year], id: 'time-entry-year' %>
+            <%= hidden_field_tag :month, params[:month], id: 'time-entry-month' %>
+            <%= hidden_field_tag :day, params[:day], id: 'time-entry-day' %>
+
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <input type="submit" value="Cancel" class="btn btn-default" data-dismiss="modal" />
+          <input type="submit" value="Create Time Entry" id="create-time-entry" class="btn btn-primary new-time-form" />
+          <input type="submit" value="Update Time Entry" id="update-time-entry" class="btn btn-primary edit-time-form hide" />
+        </div>
+
+      </div>
+    </div>
+
+  <% end %>
+</div>

@@ -19,6 +19,7 @@
 //= require jquery-ui-1.10.3.custom.min
 //= require bootstrap
 //= require partials/bootstrap-plugins
+//= require partials/loading
 //= require partials/mask
 //= require partials/timer
 //= require partials/timesheet

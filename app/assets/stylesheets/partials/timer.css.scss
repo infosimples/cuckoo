@@ -42,10 +42,6 @@
  * of the countdown that you don't need.
  */
 
-.count-days { display:none !important; }
-
-.count-div-0 { display:none !important; }
-
 .count-div {
   display:inline-block;
   width: 10px;
@@ -69,4 +65,4 @@
 
 .count-div:after { top:0.9em; }
 
-#timer-button { margin: 0; }
+.timer-button { margin: 0; }

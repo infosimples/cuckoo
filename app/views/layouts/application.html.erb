@@ -15,6 +15,12 @@
   </head>
   <body id="<%= controller_name %>">
 
+    <div id="loading" class="hide">
+      <div class="progress progress-striped active">
+        <div class="bar bar-warning" style="width: 0%;"></div>
+      </div>
+    </div>
+
     <div id="wrap">
 
       <%= render 'layouts/header' %>

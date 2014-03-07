@@ -13,35 +13,39 @@ class TimeEntriesController < ApplicationController
   # POST /time_entries
   def create
     @time_entry = TimeEntry.new(time_entry_params.merge(user: current_user))
+    @time_entry.is_billable = time_entry_params[:is_billable].to_i == 1
 
-    if @time_entry.save
-      redirect_to({
-        controller: :timesheet,
-        action:     :show,
-        year:       @time_entry.started_at.year,
-        month:      @time_entry.started_at.month,
-        day:        @time_entry.started_at.day
-      })
-
-    else
-      render action: 'new'
+    respond_to do |format|
+      if @time_entry.save
+          format.json { render :json => @time_entry.json_response(current_user, time_entry_params[:entry_date]) }
+      else
+          format.json { render :json => @time_entry.errors.full_messages, status: :unprocessable_entity }
+      end
     end
+
   end
 
   # PATCH/PUT /time_entries/:id
   def update
     puts params.inspect
-    if @time_entry.update(time_entry_params)
-      redirect_to({ controller: 'timesheet', action: 'show' }.merge(date_from_time_entry))
-    else
-      render action: 'edit'
+
+    respond_to do |format|
+      if @time_entry.update(time_entry_params)
+        format.json { render :json => @time_entry.json_response(current_user, time_entry_params[:entry_date]) }
+      else
+        format.json { render :json => @time_entry.errors.full_messages, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /time_entries/:id
   def destroy
+    time_entry = { id: @time_entry.id }
     @time_entry.destroy
-    redirect_to({ controller: 'timesheet', action: 'show' }.merge(date_from_time_entry))
+    respond_to do |format|
+      format.json { render :json => time_entry }
+    end
+
   end
 
   def finish
@@ -49,7 +53,9 @@ class TimeEntriesController < ApplicationController
       flash[:notice] = flash_message(:timer_not_stopped)
     end
 
-    redirect_to controller: :timesheet, action: :show
+    respond_to do |format|
+      format.json { render :json => { ended_at: @time_entry.ended_at.strftime('%H:%M') } }
+    end
   end
 
   private
