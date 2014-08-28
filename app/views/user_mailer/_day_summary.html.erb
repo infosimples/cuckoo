@@ -1,0 +1,92 @@
+<% if !summary[:day_entries].find_by(ended_at: nil).nil? %>
+  <h3> You have clock(s) still <span style="color:white; background-color:red">Running</span>!!! </h3>
+<% end %>
+
+<table>
+  <tr>
+    <% summary[:weekdays].each do |weekday| %>
+      <td style="text-align:center;<%= (weekday.day == summary[:date].day) ? "font-weight:bold" : "color:#777" %>" >
+        <%= weekday.strftime('%A') %><br>
+        <span>(<%= hours_and_minutes(summary[:week_hours][weekday.day]) %>)</span>
+      </td>
+    <% end %>
+    <td style="text-align:center; color:#777">
+      Total<br>
+      <span>(<%= hours_and_minutes(summary[:week_hours].values.sum) %>)</span>
+    </td>
+  </tr>
+</table>
+
+<br>
+
+<% if summary[:day_entries].empty? %>
+  <div><%= t :no_time_entry %></div>
+<% else %>
+  <!-- Table with the time entries -->
+  <table style="text-align:center">
+    <!-- Header of table with the time entries variables -->
+    <thead>
+      <tr>
+        <th style="text-align:left">Activity</th>
+        <th>Time</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% summary[:day_entries].each do |time_entry| %>
+        <tr>
+          <td style="text-align:left; min-width:10em">
+            <ul style="list-style-type:none; padding-left:0px">
+
+              <!-- Project | Task > Description  -->
+              <li style="text-align:left">
+
+                <div style="text-size:1.2em">
+                  <% if time_entry.is_billable? %>
+                    <span style="background-color:blue; color:white">Billable</span>
+                  <% end %>
+                  <%= time_entry.project.name %><span> | </span><%= time_entry.task.name %>
+                  <% if time_entry.description.present? %><span>></span><% end %>
+                </div>
+
+                <% if time_entry.description.present? %>
+                  <div style="margin-left:8px">
+                    <%= simple_format time_entry.description %>
+                  </div>
+                <% end %>
+
+              </li>
+
+            </ul>
+          </td>
+
+          <td style="min-width:5em">
+
+            <!-- Started_at and Ended_at Time column -->
+            <div style="text-size:1.2em">
+                  <%= time_entry.started_at.strftime("%H:%M") %><br>
+                  <%= time_entry.ended_at.strftime("%H:%M") unless time_entry.ended_at.nil? %>
+            </div>
+
+          </td>
+
+          <td>
+
+            <!-- Duration column -->
+            <div style="text-size:1.2em">
+              <% if !time_entry.ended_at.nil? %>
+                <%= hours_and_minutes(time_entry.ended_at - time_entry.started_at) %>
+              <% else %>
+                <span style="background-color:red; color:white">Running</span>
+              <% end %>
+            </div>
+          </td>
+
+        </tr>
+
+      <% end %><!-- end for day_entries loop -->
+
+    </tbody>
+
+  </table>
+<% end %>

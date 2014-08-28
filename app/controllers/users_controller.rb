@@ -64,8 +64,11 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    user_attributes = [:name, :email, :password, :password_confirmation, :time_zone]
-    user_attributes += [:is_admin, :is_active] if current_user.is_admin
+    user_attributes = [:name, :email, :password, :password_confirmation, :time_zone,
+                       :subscribed_to_user_summary_email]
+    if current_user.is_admin
+      user_attributes += [:is_admin, :is_active, :subscribed_to_admin_summary_email]
+    end
     params.require(:user).permit(*user_attributes)
   end
 

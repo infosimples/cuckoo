@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <% @users.each do |user| %>
+      <h2><%= user.name %></h2>
+      <%= render 'day_summary', summary: Report.new(user).day_summary %>
+    <% end %>
+  </body>
+</html>

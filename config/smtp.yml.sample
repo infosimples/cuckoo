@@ -1,0 +1,24 @@
+
+development:
+  address: addresss
+  port: port
+  authentication: :plain
+  user_name: username
+  password: password
+  from_email: cuckoo@email.com
+
+test:
+  address: addresss
+  port: port
+  authentication: :plain
+  user_name: username
+  password: password
+  from_email: cuckoo@email.com
+
+production:
+  address: addresss
+  port: port
+  authentication: :plain
+  user_name: username
+  password: password
+  from_email: cuckoo@email.com
