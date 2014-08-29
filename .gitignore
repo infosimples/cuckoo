@@ -16,7 +16,8 @@
 /tmp
 
 # Ignore user profile files
-/.rvmrc
+.rvmrc
+.ruby-gemset
 .DS_Store
 
 /config/smtp.yml
