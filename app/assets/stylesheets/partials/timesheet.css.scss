@@ -25,10 +25,22 @@
     font-size: 12px;
   }
 
-  #weekdays-list>li {
+  #weekdays-list > li {
     text-align: center;
 
     a { font-size: 16px; }
+  }
+
+  #users-list {
+
+    right: 0;
+    left: auto;
+
+    & > li a {
+      display: block;
+      border-style: none;
+      border-radius: 0px;
+    }
   }
 
 }
