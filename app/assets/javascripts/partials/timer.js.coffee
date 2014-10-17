@@ -65,10 +65,10 @@ class TimeWindow
     minute  = (if (minute < 10) then "0" + minute else minute)
     hour    = (if (hour < 10) then "0" + hour else hour)
 
-    @updateDuo 0, 1, day
-    @updateDuo 2, 3, hour
-    @updateDuo 4, 5, minute
-    @updateDuo 6, 7, second
+    #@updateDuo 0, 1, day
+    @updateDuo 0, 1, hour
+    @updateDuo 2, 3, minute
+    #@updateDuo 6, 7, second
 
   reset: (time_sec) ->
 
@@ -89,14 +89,14 @@ class TimeWindow
 
 $(document).ready (e) ->
   $.each $("div.stopped"), (i) ->
-    time_sec  = $(this).attr("data-id")
+    time_sec  = $(this).attr("data-duration")
     timer     = new TimeWindow($(this))
 
     timer.reset time_sec
     timer.stop()
 
   $.each $("div.running"), (i) ->
-    time_sec  = $(this).attr("data-id")
+    time_sec  = $(this).attr("data-duration")
     timer     = new TimeWindow($(this))
 
     $(this).data "timer", timer
@@ -104,12 +104,14 @@ $(document).ready (e) ->
     timer.reset(time_sec)
     timer.start()
 
-  $(".stop-button").click ->
-    clock = $(this).parent().siblings(".running")
+  $(document).on 'click', "a.stop-button", ->
+    clock = $(this).parents(".timer-button").siblings(".running")
     timer = clock.data("timer")
+    if $.isEmptyObject timer
+      timer = new TimeWindow($(this).parents('tr').children('div.count-holder'))
     time  = timer.getTime()
 
-    clock.removeClass("running").addClass ".stopped"
+    clock.removeClass("running").addClass "stopped"
     clock.attr "data-id", time
     timer.stop()
     $(this).addClass("none").siblings(".btn-inverse").removeClass "none"

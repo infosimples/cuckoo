@@ -26,6 +26,22 @@ class TimeEntry < ActiveRecord::Base
     update_attribute(:ended_at, Time.zone.now)
   end
 
+  def json_response(user, date)
+      position = Timesheet.new(user).day_entries(date.to_date).map(&:id).index(id)
+      duration = ended_at.blank? ? Time.zone.now - started_at : ended_at - started_at
+      {
+        id: id,
+        project: self.project,
+        task: self.task,
+        description: description,
+        start_time: started_at.strftime('%H:%M'),
+        end_time: ended_at.present? ? ended_at.strftime('%H:%M') : nil,
+        duration: duration,
+        is_billable: is_billable,
+        position: position
+      }
+  end
+
   private
 
   def set_time_parameters

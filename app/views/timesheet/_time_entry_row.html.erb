@@ -1,0 +1,98 @@
+<tr <%= 'class="hide" id="time-entry-sample"'.html_safe if is_sample_row %>
+  data-entry-id="<%= time_entry.id %>"
+  data-project-id="<%= time_entry.project_id %>"
+  data-task-id="<%= time_entry.task_id %>"
+  data-description="<%= time_entry.description %>"
+  data-is-billable="<%= time_entry.is_billable %>"
+  data-start-time="<%= time_entry.started_at.blank? ? nil : format_datetime(time_entry.started_at) %>"
+  data-end-time="<%= time_entry.ended_at.blank? ? nil : format_datetime(time_entry.ended_at) %>"
+  >
+
+  <td class="row-fluid span6">
+    <ul class="breadcrumb row-fluid span10">
+
+      <!-- Project | Task > Description  -->
+      <li>
+
+        <div class="time-entry-title">
+          <span class="billable label label-info <%= 'hide' unless time_entry.is_billable? %>">Billable</span>
+
+          <span class="project-name"><%= time_entry.project.try(:name) %></span>
+          <span class="divider">|</span>
+          <span class="task-name"><%= time_entry.task.try(:name) %></span>
+          <span class="divider description-devider <%= 'hide' if time_entry.description.blank? %>">></span>
+        </div>
+
+        <div class="time-entry-description <%= 'hide' if time_entry.description.blank? %>">
+          <%= simple_format time_entry.description, class: 'description-text' %>
+        </div>
+
+      </li>
+
+    </ul>
+  </td>
+
+  <td class="row-fluid span1">
+
+    <!-- Started_at and Ended_at Time column -->
+    <div class="row-fluid span12">
+      <blockquote>
+        <h5 class="start-time">
+          <%= format_datetime(time_entry.started_at) if time_entry.started_at.present? %>
+        </h5>
+      </blockquote>
+      <blockquote>
+        <h5 class="end-time">
+          <%= format_datetime(time_entry.ended_at) if time_entry.ended_at.present? %>
+        </h5>
+      </blockquote>
+    </div>
+
+  </td>
+
+  <td class="row-fluid span4">
+
+    <!-- Timer -->
+    <div class="count-holder <%= time_entry.ended_at.present? ? 'stopped' : 'running' %>" data-duration="<%= timer_duration(time_entry) %>">
+
+      <!-- timer hh:mm -->
+      <span class="count-hours">
+        <span class="position first-digit">
+          <span class="digit static">0</span>
+        </span>
+        <span class="position second-digit">
+          <span class="digit static">0</span>
+        </span>
+        <span class="count-div count-div-0"></span>
+      </span>
+
+      <span class="count-minutes">
+        <span class="position first-digit">
+          <span class="digit static">0</span>
+        </span>
+        <span class="position second-digit">
+          <span class="digit static">0</span>
+        </span>
+      </span>
+
+    </div>
+
+    <!-- Pass the parameters too-->
+    <div class="timer-button row-fluid span12">
+      <div class="start-button-container <%= 'hide' if time_entry.ended_at.blank? %>">
+        <a class="btn btn-inverse btn-small start-button">Start</a>
+      </div>
+      <div class="stop-button-container <%= 'hide' if time_entry.ended_at.present? %>">
+        <%= stop_button(time_entry) %>
+      </div>
+    </div>
+
+  </td>
+  <td class="span1">
+    <a class="edit-time-entry" data-toggle="modal" data-target="#timeEntryModal" href="#">
+      <i class="icon-edit"></i>
+    </a>
+      <%= link_to '<i class="icon-trash"></i>'.html_safe, time_entry.persisted? ? time_entry : '#',
+                  class: 'delete-time-entry', method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
+  </td>
+</tr>
